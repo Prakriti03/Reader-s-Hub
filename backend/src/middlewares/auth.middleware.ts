@@ -3,6 +3,7 @@ import { Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 import config from "../config";
 import { IUser } from "../interfaces/user.interface";
+import { error } from "console";
 
 export function authentication(
   req: Request,
@@ -32,3 +33,16 @@ export function authentication(
     res.json("Unauthenticated");
   }
 }
+
+export function authorize(role: string) {
+    return (req: Request, res: Response, next: NextFunction) => {
+      const user = req.user!;
+      console.log(user);
+      if (!user.role.includes(role)) {
+        res.json("Unauthorized");
+        return;
+      }
+  
+      next();
+    };
+  }

@@ -24,16 +24,19 @@ export function getUserByEmail(email: string) {
 }
 
 export async function updateUser(userId: string, updatedUser: IUser) {
-  
-  if(updatedUser.password!==undefined){
+  if (updatedUser.password !== undefined) {
     const password = await bcrypt.hash(updatedUser.password, 10);
 
     updatedUser.password = password;
   }
-  
+
   const data = UserModel.updateUser(userId, updatedUser);
 
   return data;
 }
 
-export function deleteUser() {}
+export function deleteUser(userId: string) {
+  const data = UserModel.deleteUser(userId);
+
+  return data;
+}

@@ -28,6 +28,7 @@ export async function login(body: Pick<IUser, "email" | "password">) {
     id: existingUser.id,
     username: existingUser.username,
     email: existingUser.email,
+    role: existingUser.role,
   };
 
   const accessToken = sign(payload, config.jwt.secret!, {

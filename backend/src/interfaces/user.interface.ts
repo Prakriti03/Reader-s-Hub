@@ -5,7 +5,7 @@ export interface IUser {
   password: string;
   bio: string;
   profilePictureUrl: string;
-  // permission : string[];
+  role : string;
 }
 
 export interface IGetUserQuery {

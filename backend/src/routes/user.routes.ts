@@ -5,13 +5,13 @@ import {
   getUsers,
   updateUser,
 } from "../controller/user.controller";
-import { authentication } from "../middlewares/auth.middleware";
+import { authentication, authorize } from "../middlewares/auth.middleware";
 
 const route = express();
 
 route.post("/signup", createUser);
-route.get("/", authentication, getUsers);
+route.get("/", authentication, authorize("admin"), getUsers);
 route.put("/:id", authentication, updateUser);
-route.delete("/:id", authentication, deleteUser);
+route.delete("/:id", authentication, authorize("admin"), deleteUser);
 
 export default route;

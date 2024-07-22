@@ -9,6 +9,7 @@ export class UserModel extends BaseModel {
       password: user.password,
       bio: user.bio,
       profilePictureUrl: user.profilePictureUrl,
+      role: "user",
     };
     console.log(userToCreate);
     const query = this.queryBuilder().insert(userToCreate).table("Users");
@@ -31,7 +32,7 @@ export class UserModel extends BaseModel {
       password: user.password,
       bio: user.bio,
       profilePictureUrl: user.profilePictureUrl,
-      updated_at: new Date().toISOString(),    //convert to camel case
+      updated_at: new Date().toISOString(), //convert to camel case
     };
 
     const query = this.queryBuilder().update(updatedUser).table("Users").where({
@@ -44,7 +45,11 @@ export class UserModel extends BaseModel {
   }
 
   static async deleteUser(userId: string) {
-    const query = this.queryBuilder().del().table("Users").where("id", userId);
+    const query = this.queryBuilder()
+      .del()
+      .table("Users")
+      .where("id", userId)
+      .returning("*");
 
     const data = await query;
 
