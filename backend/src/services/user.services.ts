@@ -8,17 +8,32 @@ export async function createUser(user: IUser) {
   user.password = password;
 
   const data = UserModel.createUser(user);
-  
+
   return data;
 }
 
-export function getUsers() {}
+export async function getUsers() {
+  const data = await UserModel.getUsers();
+
+  return data;
+}
 
 export function getUserByEmail(email: string) {
   const data = UserModel.getUserByEmail(email);
   return data;
 }
 
-export function updateUser() {}
+export async function updateUser(userId: string, updatedUser: IUser) {
+  
+  if(updatedUser.password!==undefined){
+    const password = await bcrypt.hash(updatedUser.password, 10);
+
+    updatedUser.password = password;
+  }
+  
+  const data = UserModel.updateUser(userId, updatedUser);
+
+  return data;
+}
 
 export function deleteUser() {}

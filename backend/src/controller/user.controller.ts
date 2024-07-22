@@ -5,14 +5,24 @@ export function createUser(req: Request, res: Response) {
   const { body } = req;
 
   try {
-    const data=UserService.createUser(body);
+    const data = UserService.createUser(body);
     res.json(body);
   } catch (error) {
     res.json(error);
   }
 }
 
-export function getUsers() {}
+export async function getUsers(req: Request, res: Response) {
+  const data = await UserService.getUsers();
 
-export function updateUser() {}
+  res.json(data);
+}
+
+export async function updateUser(req: Request, res: Response) {
+  const { id } = req.params;
+  const { body } = req;
+  const data = await UserService.updateUser(id,body);
+
+  res.json(data);
+}
 export function deleteUser() {}
