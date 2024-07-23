@@ -21,7 +21,7 @@ export class StoryModel extends BaseModel {
     const query = this.queryBuilder()
       .select("*")
       .table("Stories")
-      .where("id", id);
+      .where("id", id).first();
     const data = await query;
 
     return data;

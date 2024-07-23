@@ -1,18 +1,18 @@
 import express from "express";
-
+import { authorizeStoryOwner } from "../middlewares/authorize.middleware";
 import { authentication, authorize } from "../middlewares/auth.middleware";
 import {
-  createChapter,
+  addChapter,
   deleteChapter,
-  getChapterById,
+  getChapterByNumber,
   updateChapter,
 } from "../controller/chapter.controller";
 
-const route = express();
+const route = express.Router({ mergeParams: true });
 
-route.post("/", authentication, createChapter);
-route.get("/:id",authentication, getChapterById);
-route.put("/:id",authentication, updateChapter);
-route.delete("/:id",authentication, deleteChapter);
+route.post("/:number", authentication, authorizeStoryOwner, addChapter);
+route.get("/:number", authentication, getChapterByNumber);
+route.put("/:number",authentication, authorizeStoryOwner, updateChapter);
+route.delete("/:number", authentication, authorizeStoryOwner, deleteChapter);
 
 export default route;

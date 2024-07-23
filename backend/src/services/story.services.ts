@@ -6,8 +6,8 @@ export function createStory(story : IStories, userId : string) {
 
   return data;
 }
-export function getStoryById(id: string) {
-  const data = StoryModel.getStoryById(id);
+export const getStoryById=async(id: string)=> {
+  const data = await StoryModel.getStoryById(id);
 
   return data;
 }

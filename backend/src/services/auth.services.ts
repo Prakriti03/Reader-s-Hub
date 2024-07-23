@@ -11,8 +11,7 @@ export async function login(body: Pick<IUser, "email" | "password">) {
     return "Invalid email";
   }
 
-  console.log(existingUser.password);
-  console.log(body.password);
+
 
   const isValidPassword = await bcrypt.compare(
     body.password,
