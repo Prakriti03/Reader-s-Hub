@@ -12,8 +12,8 @@ export async function createUser(user: IUser) {
   return data;
 }
 
-export async function getUsers() {
-  const data = await UserModel.getUsers();
+export  function getUsers() {
+  const data =  UserModel.getUsers();
 
   return data;
 }
