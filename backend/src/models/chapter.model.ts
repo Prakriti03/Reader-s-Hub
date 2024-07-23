@@ -5,14 +5,14 @@ export class ChapterModel extends BaseModel {
   static async create(chapter: IChapter) {
     const chapterToCreate = {
       id: chapter.id,
-      stories_id: chapter.stories_id,
+      stories_id: chapter.stories_id,  //foreign key uta bata pathuana parne
       number: chapter.number,
       title: chapter.title,
       content_url: chapter.content_url,
       status: chapter.status,
       image_url: chapter.image_url,
     };
-    const query = this.queryBuilder().insert(chapterToCreate).table("Chapters");
+    const query = this.queryBuilder().insert(chapterToCreate).table("Chapters").where("stories_id", chapter.stories_id);
     const data = await query;
 
     return data;

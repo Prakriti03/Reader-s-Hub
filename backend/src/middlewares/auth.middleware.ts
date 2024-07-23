@@ -27,7 +27,7 @@ export function authentication(
   try {
     const user = verify(token[1], config.jwt.secret!) as IUser;
 
-    req.user = user;
+    req.user = user;      
     next();
   } catch (error) {
     res.json("Unauthenticated");

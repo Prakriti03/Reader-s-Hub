@@ -7,10 +7,10 @@ import { updateChapter } from "../services/chapter.services";
 
 const route = express();
 
-route.post("/",createStory );
-route.get("/:id",getStoryById)
-route.put("/:id",updateStory);
-route.delete("/:id",deleteStory)
+route.post("/",authentication,createStory );
+route.get("/:id",authentication,getStoryById)
+route.put("/:id",authentication,updateStory);
+route.delete("/:id",authentication,deleteStory)
 
 
 route.use("/chapter", chapterRoute);

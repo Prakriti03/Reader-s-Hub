@@ -10,9 +10,9 @@ import {
 
 const route = express();
 
-route.post("/", createChapter);
-route.get("/:id", getChapterById);
-route.put("/:id", updateChapter);
-route.delete("/:id", deleteChapter);
+route.post("/", authentication, createChapter);
+route.get("/:id",authentication, getChapterById);
+route.put("/:id",authentication, updateChapter);
+route.delete("/:id",authentication, deleteChapter);
 
 export default route;
