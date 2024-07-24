@@ -5,7 +5,6 @@ import * as ChapterService from "../services/chapter.services";
 export async function addChapter(req: Request, res: Response) {
   const { body } = req;
   const { storyId, number } = req.params;
-  const  userId = req.user?.id;
 
   console.log(`number for addchapter : ${number}`)
 
