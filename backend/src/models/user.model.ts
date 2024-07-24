@@ -11,7 +11,6 @@ export class UserModel extends BaseModel {
       profilePictureUrl: user.profilePictureUrl,
       role: "user",
     };
-    console.log(userToCreate);
     const query = this.queryBuilder().insert(userToCreate).table("Users");
     const data = await query;
     return data;

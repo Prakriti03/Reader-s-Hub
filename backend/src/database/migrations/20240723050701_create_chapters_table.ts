@@ -1,9 +1,9 @@
 import { Knex } from "knex";
 
-const TABLE_NAME = "Stories";
+const TABLE_NAME = "Chapters";
 
 /**
- * Create table Stories.
+ * Create table Chapters.
  *
  * @param   {Knex} knex
  * @returns {Promise}
@@ -11,21 +11,25 @@ const TABLE_NAME = "Stories";
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(TABLE_NAME, (table) => {
     table.bigIncrements("id").primary();
-    table.string("title", 100).notNullable();
-    table.string("description");
     table
-      .bigInteger("user_id")
+      .bigInteger("stories_id")
       .unsigned()
       .notNullable()
       .references("id")
-      .inTable("Users")
+      .inTable("Stories")
       .onDelete("CASCADE");
-    table.string("cover_image_url");
+    table.bigInteger("number").notNullable();
+    table.string("title", 100).notNullable();
+    table.string("content_url");
+    table.timestamp("published_date").notNullable().defaultTo(knex.raw("now()"));
+    table.enum("status", ["draft", "published"]);
+    table.string("image_url");
+    table.unique(["stories_id", "number"]);
   });
 }
 
 /**
- * Drop table Stories.
+ * Drop table TABLE_NAME.
  *
  * @param   {Knex} knex
  * @returns {Promise}

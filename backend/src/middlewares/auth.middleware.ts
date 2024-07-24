@@ -18,7 +18,6 @@ export function authentication(
 
   const token = authorization!.split(" ");
 
-  console.log(authorization);
 
   if (token.length !== 2 || token[0] !== "Bearer") {
     res.json("Unauthenticated");
@@ -27,7 +26,7 @@ export function authentication(
   try {
     const user = verify(token[1], config.jwt.secret!) as IUser;
 
-    req.user = user;
+    req.user = user;      
     next();
   } catch (error) {
     res.json("Unauthenticated");
@@ -37,7 +36,6 @@ export function authentication(
 export function authorize(role: string) {
     return (req: Request, res: Response, next: NextFunction) => {
       const user = req.user!;
-      console.log(user);
       if (!user.role.includes(role)) {
         res.json("Unauthorized");
         return;
