@@ -1,26 +1,52 @@
-<form id="login-form" class="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
-  <div class="mb-4">
-    <label for="emailInput" class="block text-gray-700">Email address</label>
-    <input
-      type="email"
-      id="emailInput"
-      class="form-control w-full px-3 py-2 border rounded-md"
-      placeholder="Enter email"
-    />
+<div
+  class="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
+  style="
+    background-image: url('https://images.unsplash.com/photo-1630948197497-3c0de9d73ad2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Ym9vayUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D');
+  "
+>
+  <!-- Blurred background overlay -->
+  <div class="absolute inset-0 bg-black opacity-80"></div>
+
+  <!-- Login Section -->
+  <div class="relative z-10 w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+    <div class="flex justify-center md:justify-start pb-8">
+      <a href="#"
+        ><img src="/logo.png" alt="Logo" class="h-16 md:h-20"></a
+      >
+    </div>
+    <p class="text-center text-3xl md:text-4xl text-orange-700">Welcome!</p>
+    <form id="login-form" class="flex flex-col pt-3 md:pt-8">
+      <div class="flex flex-col pt-4">
+        <label for="email" class="text-lg text-orange-700">Email</label>
+        <input
+          type="email"
+          id="emailInput"
+          placeholder="your@email.com"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+      <div class="flex flex-col pt-4">
+        <label for="password" class="text-lg text-orange-700">Password</label>
+        <input
+          type="password"
+          id="passwordInput"
+          placeholder="Password"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+      <input
+        type="submit"
+        value="Log In"
+        class="bg-orange-700 text-white font-bold text-lg hover:bg-orange-900 p-2 mt-8 cursor-pointer"
+      />
+    </form>
+    <div class="text-center pt-12 pb-12 text-orange-700">
+      <p>
+        Don't have an account?
+        <a href="" class="underline font-semibold" id="signup-link"
+          >Register here.</a
+        >
+      </p>
+    </div>
   </div>
-  <div class="mb-4">
-    <label for="passwordInput" class="block text-gray-700">Password</label>
-    <input
-      type="password"
-      id="passwordInput"
-      class="form-control w-full px-3 py-2 border rounded-md"
-      placeholder="Password"
-    />
-  </div>
-  <button
-    type="submit"
-    class="btn btn-primary w-full bg-blue-500 text-white py-2 rounded-md"
-  >
-    Submit
-  </button>
-</form>
+</div>

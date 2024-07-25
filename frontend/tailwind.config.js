@@ -5,6 +5,7 @@ export default {
     './src/**/*.{js,ts,jsx,tsx}',
     './src/views/login/login.html',
     './src/views/signup/signup.html',
+    './src/views/home/home.html'
     
   ],
   theme: {

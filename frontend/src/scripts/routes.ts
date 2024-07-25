@@ -4,12 +4,12 @@ const routes = [
   {
     path: "/",
     action: async () =>
-      "Reader's Hub",
+      fetch("./src/views/login/login.html").then((response) => response.text()),
   },
   {
     path: "/home",
     action: async () =>
-      "Reader's Hub HomePage",
+      fetch("./src/views/home/home.html").then((response)=>response.text()),
   },
   {
     path: "/login",

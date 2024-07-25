@@ -12,9 +12,9 @@ const handleSignUp = async (event: Event) => {
     document.getElementById("passwordInput") as HTMLInputElement
   ).value;
   const bio = (document.getElementById("bioInput") as HTMLInputElement).value;
-  const profilePictureUrl = (
-    document.getElementById("profilePictureInput") as HTMLInputElement
-  ).value;
+//   const profilePictureUrl = (
+//     document.getElementById("profilePictureInput") as HTMLInputElement
+//   ).value;
 
   try {
     const response = await signup(
@@ -22,7 +22,7 @@ const handleSignUp = async (event: Event) => {
       email,
       password,
       bio,
-      profilePictureUrl
+      "hihu",   //send profile picture link later
     );
     alert(JSON.stringify(response));
   } catch (error) {

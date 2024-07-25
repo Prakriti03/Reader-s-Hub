@@ -9,7 +9,7 @@ const render = async (pathname: string) => {
     return;
   }
 
-  const contentElement = document.getElementById("content");
+  const contentElement = document.getElementById("app");
 
   if (contentElement) {
     contentElement.innerHTML = content;
