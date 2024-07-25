@@ -1,5 +1,6 @@
 import render from "../render";
 import handleLogin from "../../views/login/login";
+import handleSignUp from "../../views/signup/signup";
 
 export const addEventListeners = () => {
   document
@@ -14,10 +15,9 @@ export const addEventListeners = () => {
   document
     .getElementById("login-form")
     ?.addEventListener("submit", handleLogin);
-  //   document
-  //     .getElementById("sigup-form")
-  //     ?.addEventListener("submit", handleSignUpUser);
-
+  document
+    .getElementById("signup-form")
+    ?.addEventListener("submit", handleSignUp);
 };
 
 export const navigateTo = (path: string) => {

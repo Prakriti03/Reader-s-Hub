@@ -3,7 +3,7 @@ import { saveToken } from "../../utils/saveToken";
 
 const handleLogin = async (event: Event) => {
   console.log("handleLogin function called"); 
-  event?.preventDefault();
+  event.preventDefault();
   const email = (document.getElementById("emailInput") as HTMLInputElement)
     .value;
   const password = (
