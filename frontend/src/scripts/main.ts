@@ -1,3 +1,4 @@
+import '../styles/tailwind.css';
 import render from "./render";
 
 window.addEventListener("popstate", () => {

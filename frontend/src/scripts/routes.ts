@@ -2,9 +2,14 @@ import UniversalRouter from "universal-router";
 
 const routes = [
   {
-    path: "/home",
+    path: "/",
     action: async () =>
       "Reader's Hub",
+  },
+  {
+    path: "/home",
+    action: async () =>
+      "Reader's Hub HomePage",
   },
   {
     path: "/login",
