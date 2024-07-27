@@ -17,11 +17,19 @@ export class StoryModel extends BaseModel {
     return data;
   }
 
+  static async getStories() {
+    const query = this.queryBuilder().select("*").table("Stories");
+    const data = await query;
+
+    return data;
+  }
+
   static async getStoryById(id: string) {
     const query = this.queryBuilder()
       .select("*")
       .table("Stories")
-      .where("id", id).first();
+      .where("id", id)
+      .first();
     const data = await query;
 
     return data;

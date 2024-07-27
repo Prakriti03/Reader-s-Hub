@@ -2,7 +2,6 @@ import { signup } from "../../services/auth.services";
 
 const handleSignUp = async (event: Event) => {
   event.preventDefault();
-  console.log("Inside Handle Sign Up!!!")
   const username = (
     document.getElementById("usernameInput") as HTMLInputElement
   ).value;

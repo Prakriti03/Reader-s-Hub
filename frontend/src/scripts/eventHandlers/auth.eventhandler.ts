@@ -1,8 +1,11 @@
 import render from "../render";
 import handleLogin from "../../views/login/login";
 import handleSignUp from "../../views/signup/signup";
+import { homeEventListeners } from "./home.eventHandler";
 
 export const addEventListeners = () => {
+
+  homeEventListeners();
   document
     .getElementById("home-link")
     ?.addEventListener("click", () => navigateTo("/home"));

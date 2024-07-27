@@ -7,8 +7,8 @@ export class LibraryModel extends BaseModel {
     const query = this.queryBuilder()
       .select("Stories.*")
       .from("Stories")
-      .join("reading_list", "Stories.id", "=", "reading_list.stories_id")
-      .where("reading_list.user_id", userId);
+      .join("Reading-List", "Stories.id", "=", "Reading-List.stories_id")
+      .where("Reading-List.user_id", userId);
 
     const data = await query;
     return data;

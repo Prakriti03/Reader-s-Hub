@@ -1,8 +1,8 @@
+import { navigateTo } from "../../scripts/eventHandlers/auth.eventhandler";
 import { login } from "../../services/auth.services";
-import { saveToken } from "../../utils/saveToken";
+import { saveToken } from "../../utils/token";
 
 const handleLogin = async (event: Event) => {
-  console.log("handleLogin function called"); 
   event.preventDefault();
   const email = (document.getElementById("emailInput") as HTMLInputElement)
     .value;
@@ -12,8 +12,12 @@ const handleLogin = async (event: Event) => {
 
   try {
     const response = await login(email, password);
-    alert(JSON.stringify(response));
     saveToken(response.accessToken);
+    alert(JSON.stringify(response));
+    const accessToken = response.accessToken
+    if (accessToken) {
+      navigateTo("/home");
+    }
   } catch (error) {
     console.error("Error during login:", error);
   }

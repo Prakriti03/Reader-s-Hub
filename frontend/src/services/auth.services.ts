@@ -1,9 +1,9 @@
 import axios from "axios";
-import { baseUrl } from "../utils/baseURL";
+import { BASE_URL } from "../constants/urls";
 
 export async function login(email: string, password: string) {
   try {
-    const response = await axios.post(`${baseUrl}/auth/login`, {
+    const response = await axios.post(`${BASE_URL}/auth/login`, {
       email,
       password,
     });
@@ -22,7 +22,7 @@ export async function signup(
   profilePictureUrl: string
 ) {
   try {
-    const response = await axios.post(`${baseUrl}/users/signup`, {
+    const response = await axios.post(`${BASE_URL}/users/signup`, {
       username,
       email,
       password,

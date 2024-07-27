@@ -13,6 +13,11 @@ export async function createStory(req: Request, res: Response) {
     }
 
 }
+export async function getStories(req:Request,res:Response) {
+  const data = await StoryService.getStories();
+  res.json(data);
+}
+
 export async function getStoryById(req: Request, res: Response) {
     const { id } = req.params;
 

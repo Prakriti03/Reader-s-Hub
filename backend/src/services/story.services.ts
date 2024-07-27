@@ -11,6 +11,11 @@ export const getStoryById=async(id: string)=> {
 
   return data;
 }
+export const getStories = async()=>{
+  const data = await StoryModel.getStories();
+
+  return data;
+}
 export function updateStory(id: string, storyToUpdate: IStories, userId : string) {
   const data = StoryModel.updateStory(id, storyToUpdate, userId );
 

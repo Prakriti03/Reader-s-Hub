@@ -1,7 +1,10 @@
 import { addEventListeners } from "./eventHandlers/auth.eventhandler";
 import router from "./routes";
 
+
+
 const render = async (pathname: string) => {
+  
   const content = await router.resolve({ pathname });
 
   if (typeof content !== "string") {
