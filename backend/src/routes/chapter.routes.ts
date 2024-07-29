@@ -15,4 +15,5 @@ route.get("/:number", authentication, getChapterByNumber);
 route.put("/:number",authentication, authorizeStoryOwner, updateChapter);
 route.delete("/:number", authentication, authorizeStoryOwner, deleteChapter);
 
+
 export default route;

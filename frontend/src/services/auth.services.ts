@@ -15,20 +15,14 @@ export async function login(email: string, password: string) {
 }
 
 export async function signup(
-  username: string,
-  email: string,
-  password: string,
-  bio: string,
-  profilePictureUrl: string
+  formData : FormData
 ) {
   try {
-    const response = await axios.post(`${BASE_URL}/users/signup`, {
-      username,
-      email,
-      password,
-      bio,
-      profilePictureUrl,
-    });
+    const response = await axios.post(`${BASE_URL}/users/signup`, formData,{
+      headers:{
+        'Content-Type' : 'multipart/form-data'
+      }
+    })
     return response.data;
   } catch (error) {
     return error;

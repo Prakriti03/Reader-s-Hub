@@ -19,7 +19,11 @@
     <p class="text-center text-3xl md:text-4xl text-orange-700">
       Join Reader's Hub
     </p>
-    <form id="signup-form" class="flex flex-col pt-3 md:pt-8">
+    <form
+      id="signup-form"
+      class="flex flex-col pt-3 md:pt-8"
+      enctype="multipart/form-data"
+    >
       <div class="flex flex-col pt-4">
         <label for="username" class="text-lg text-orange-700">Username</label>
         <input
@@ -84,14 +88,18 @@
           type="file"
           id="profilePictureInput"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+          accept="image/*"
         />
       </div>
+
       <input
         type="submit"
         value="Sign Up"
+        id="signUpButton"
         class="bg-orange-700 text-white font-bold text-lg hover:bg-orange-900 p-2 mt-8 cursor-pointer"
       />
     </form>
+    <div id="loadingSpinner" class="hidden">Loading...</div>
     <div class="text-center pt-12 pb-12 text-orange-700">
       <p>
         Already have an account?

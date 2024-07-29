@@ -3,6 +3,7 @@ import { BaseModel } from "./base.model";
 
 export class UserModel extends BaseModel {
   static async createUser(user: IUser) {
+    console.log(`Profile picture inside model : ${user.profilePictureUrl}`);
     const userToCreate = {
       username: user.username,
       email: user.email,
@@ -30,7 +31,7 @@ export class UserModel extends BaseModel {
       email: user.email,
       password: user.password,
       bio: user.bio,
-      profilePictureUrl: user.profilePictureUrl,
+      profilePicture: user.profilePictureUrl,
       updated_at: new Date().toISOString(), //convert to camel case
     };
 

@@ -1,11 +1,13 @@
 import express, { Router } from "express";
 import route from "./routes/index.routes";
-import config from "./config";
+import config from "./config/config";
 import cors from "cors";
+import path from "path";
 
 const app = express();
 
 app.use(cors());
+app.use("/uploads", express.static(path.join(__dirname, "../public/uploads")));
 
 app.use(express.json());
 app.use(route);

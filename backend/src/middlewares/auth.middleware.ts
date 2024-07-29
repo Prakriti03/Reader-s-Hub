@@ -1,7 +1,7 @@
 import { Request } from "../interfaces/auth.interface";
 import { Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
-import config from "../config";
+import config from "../config/config";
 import { IUser } from "../interfaces/user.interface";
 import { error } from "console";
 
@@ -30,7 +30,7 @@ export function authentication(
     req.user = user;
     next();
   } catch (error) {
-    console.log(error)
+    console.log(error);
 
     res.json("Unauthenticated");
   }

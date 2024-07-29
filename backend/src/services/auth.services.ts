@@ -2,7 +2,7 @@ import { IUser } from "../interfaces/user.interface";
 import { getUserByEmail } from "./user.services";
 import bcrypt from "bcrypt";
 import { sign } from "jsonwebtoken";
-import config from "../config";
+import config from "../config/config";
 
 export async function login(body: Pick<IUser, "email" | "password">) {
   const existingUser = await getUserByEmail(body.email);
@@ -10,8 +10,6 @@ export async function login(body: Pick<IUser, "email" | "password">) {
   if (!existingUser) {
     return "Invalid email";
   }
-
-
 
   const isValidPassword = await bcrypt.compare(
     body.password,

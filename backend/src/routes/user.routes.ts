@@ -6,10 +6,11 @@ import {
   updateUser,
 } from "../controller/user.controller";
 import { authentication, authorize } from "../middlewares/auth.middleware";
+import { upload } from "../middlewares/upload.middleware";
 
 const route = express();
 
-route.post("/signup", createUser);
+route.post("/signup", upload.single("profilePicture"), createUser);
 route.get("/", authentication, authorize("admin"), getUsers);
 route.put("/:id", authentication, updateUser);
 route.delete("/:id", authentication, authorize("admin"), deleteUser);
