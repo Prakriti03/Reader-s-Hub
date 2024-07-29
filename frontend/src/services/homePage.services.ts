@@ -1,10 +1,11 @@
 import axios from "axios";
-import { BASE_URL, GET_LIBRARY, GET_STORIES } from "../constants/urls";
+import { BASE_URL, GET_LIBRARY, GET_POST_STORIES} from "../constants/urls";
 import { getToken } from "../utils/token";
+import { IStories } from "../interfaces/story.interfaces";
 
 export const displayStories = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}${GET_STORIES}`, {
+    const response = await axios.get(`${BASE_URL}${GET_POST_STORIES}`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -30,3 +31,5 @@ export const displayLibrary = async () => {
     return error;
   }
 };
+
+

@@ -61,6 +61,13 @@ const routes = [
   {
     path: "/write",
     action: async () =>
+      await fetch("./src/views/writings/addStory.html").then((response) =>
+        response.text()
+      ),
+  },
+  {
+    path: "/writing-interface",
+    action: async () => await
       fetch("./src/views/writings/writeStory.html").then((response) =>
         response.text()
       ),

@@ -1,0 +1,54 @@
+<div class="container mx-auto my-8">
+  <h1 class="text-3xl font-bold text-center mb-8">Start Writing Your Story</h1>
+  
+  <div class="bg-white p-6 rounded-lg shadow-md">
+    <!-- Chapter Topic Input -->
+    <input type="text" id="chapter-topic" placeholder="Chapter Name" class="w-full mb-4 text-2xl border-none focus:ring-0" />
+    
+    <!-- Toolbar -->
+    <div class="flex items-center mb-4 space-x-2">
+      <button type="button" id="bold-btn" class="p-2 rounded-md bg-gray-100 text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <strong>B</strong>
+      </button>
+      <button type="button" id="italic-btn" class="p-2 rounded-md bg-gray-100 text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <em>I</em>
+      </button>
+      <button type="button" id="underline-btn" class="p-2 rounded-md bg-gray-100 text-black hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <u>U</u>
+      </button>
+    </div>
+
+    <!-- Editor -->
+    <div id="editor" contenteditable="true" class="editor border border-transparent text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></div>
+  </div>
+</div>
+
+<style>
+  #chapter-topic {
+    border: none;
+    font-size: 1.5rem;
+  }
+  
+  #chapter-topic:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  #editor {
+    min-height: 300px;
+    font-size: 0.875rem; /* small font */
+    border: none; /* invisible border */
+  }
+  
+  #editor:focus {
+    outline: none;
+  }
+  
+  .toolbar button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+  }
+</style>

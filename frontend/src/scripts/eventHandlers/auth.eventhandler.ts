@@ -2,9 +2,10 @@ import render from "../render";
 import handleLogin from "../../views/login/login";
 import handleSignUp from "../../views/signup/signup";
 import { homeEventListeners } from "./home.eventHandler";
+import { writingsEventListeners } from "./writings.eventHandler";
 
 export const addEventListeners = () => {
-
+  writingsEventListeners();
   homeEventListeners();
   document
     .getElementById("home-link")
