@@ -2,6 +2,7 @@ import axios from "axios";
 import { BASE_URL, GET_LIBRARY, GET_POST_STORIES} from "../constants/urls";
 import { getToken } from "../utils/token";
 import { IStories } from "../interfaces/story.interfaces";
+import { token } from "../utils/authHelpers";
 
 export const displayStories = async () => {
   try {

@@ -19,11 +19,11 @@ export const addStory = async (event: Event) => {
     ) as HTMLInputElement
   ).value;
 
-  const storyToAdd = {
+ const storyToAdd = {
     title: storyTitle,
     description: storyDescription,
     cover_image_url: coverImageUrl,
-  };
+  }; 
 
   try {
     const response = await addStoryWritings(storyToAdd);
