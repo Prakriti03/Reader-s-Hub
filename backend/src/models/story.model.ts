@@ -8,7 +8,7 @@ export class StoryModel extends BaseModel {
       title: story.title,
       description: story.description,
       user_id: userId,
-      cover_image_url: story.cover_image_url,
+      cover_image_url: story.coverImageUrl,
     };
 
     const query = this.queryBuilder().insert(storyToCreate).table("Stories");
@@ -38,7 +38,7 @@ export class StoryModel extends BaseModel {
     const updatedStory = {
       title: story.title,
       description: story.description,
-      cover_image_url: story.cover_image_url,
+      cover_image_url: story.coverImageUrl,
     };
 
     const query = this.queryBuilder()

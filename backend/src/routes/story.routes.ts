@@ -9,10 +9,11 @@ import {
 } from "../controller/story.controller";
 
 import { authentication, authorize } from "../middlewares/auth.middleware";
+import { upload } from "../middlewares/upload.middleware";
 
 const route = express();
 
-route.post("/", authentication, createStory);
+route.post("/", authentication,upload.single("coverImage"), createStory);
 route.get("/:id", authentication, getStoryById);
 route.get("/", getStories);
 route.put("/:id", authentication, updateStory);

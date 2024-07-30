@@ -77,4 +77,13 @@ export class ChapterModel extends BaseModel {
 
     return data;
   }
+  static async countChaptersByStory(storyId: string) {
+    const query = this.queryBuilder()
+      .count("* as count")
+      .from("Chapters")
+      .where("stories_id", storyId);
+
+    const result: any = await query;
+    return result[0].count;
+  }
 }

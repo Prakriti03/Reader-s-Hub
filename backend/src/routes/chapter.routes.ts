@@ -3,6 +3,7 @@ import { authorizeStoryOwner } from "../middlewares/authorize.middleware";
 import { authentication, authorize } from "../middlewares/auth.middleware";
 import {
   addChapter,
+  countChaptersByStory,
   deleteChapter,
   getChapterByNumber,
   updateChapter,
@@ -12,8 +13,8 @@ const route = express.Router({ mergeParams: true });
 
 route.post("/:number", authentication, authorizeStoryOwner, addChapter);
 route.get("/:number", authentication, getChapterByNumber);
-route.put("/:number",authentication, authorizeStoryOwner, updateChapter);
+route.put("/:number", authentication, authorizeStoryOwner, updateChapter);
 route.delete("/:number", authentication, authorizeStoryOwner, deleteChapter);
-
+route.get("/", authentication, countChaptersByStory);
 
 export default route;

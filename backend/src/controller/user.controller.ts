@@ -7,7 +7,6 @@ export async function createUser(req: Request, res: Response) {
   const profilePicture = req.file
 
   try {
-    console.log(`req q : ${req.file}`)
     if (profilePicture) {
   
       // const fileUrl = `uploads/${req.file.filename}`;

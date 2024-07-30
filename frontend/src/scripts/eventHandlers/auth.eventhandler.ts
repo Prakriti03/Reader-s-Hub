@@ -3,8 +3,10 @@ import handleLogin from "../../views/login/login";
 import handleSignUp from "../../views/signup/signup";
 import { homeEventListeners } from "./home.eventHandler";
 import { writingsEventListeners } from "./writings.eventHandler";
+import { readingsEventListeners } from "./readings.eventHandlers";
 
 export const addEventListeners = () => {
+  readingsEventListeners();
   writingsEventListeners();
   homeEventListeners();
   document

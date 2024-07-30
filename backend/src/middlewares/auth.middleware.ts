@@ -3,7 +3,6 @@ import { Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 import config from "../config/config";
 import { IUser } from "../interfaces/user.interface";
-import { error } from "console";
 
 export function authentication(
   req: Request,

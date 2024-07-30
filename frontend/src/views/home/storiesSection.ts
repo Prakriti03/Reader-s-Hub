@@ -1,5 +1,5 @@
 import { displayStories } from "../../services/homePage.services";
-import { populateTemplate } from "../../utils/replaceTemplate";
+import { populateTemplate } from "../../utils/populateTemplates";
 
 //talk of the town
 export const showStories = async () => {
@@ -9,7 +9,7 @@ export const showStories = async () => {
       (response) => response.text()
     );
 
-    const topStories = data.slice(0, 5);   //display only top 5 stories
+    const topStories = data.slice(0, 5); //display only top 5 stories
 
     const storyCardsHtml = populateTemplate(topStories);
 

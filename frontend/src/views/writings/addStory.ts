@@ -3,6 +3,7 @@ import { addStoryWritings } from "../../services/writeStories.services";
 
 export const addStory = async (event: Event) => {
   console.log("inside add story!!!");
+  // setLoading(true);
   event.preventDefault();
   const storyTitle = (
     document.getElementById("writings-story-title") as HTMLInputElement
@@ -13,24 +14,23 @@ export const addStory = async (event: Event) => {
   //   const storyCoverImage = document.getElementById(
   //     "cover-image"
   //   ) as HTMLImageElement;
-  const coverImageUrl = (
-    document.getElementById(
-      "writings-story-cover-image-url"
-    ) as HTMLInputElement
-  ).value;
+  const coverImage = (
+    document.getElementById("coverImageInput") as HTMLInputElement
+  ).files![0];
 
- const storyToAdd = {
-    title: storyTitle,
-    description: storyDescription,
-    cover_image_url: coverImageUrl,
-  }; 
+  const formData = new FormData();
+
+  formData.append("title", storyTitle);
+  formData.append("description", storyDescription);
+  formData.append("coverImage", coverImage);
 
   try {
-    const response = await addStoryWritings(storyToAdd);
-    alert(response.title);
-    navigateTo("/writing-interface")
- 
+    const response = await addStoryWritings(formData);
+    alert(JSON.stringify(response));
   } catch (error) {
-    alert(error);
-  }
+    return error;
+  } 
+  // finally {
+  //   setLoading(false); // Set loading state to false
+  // }
 };
