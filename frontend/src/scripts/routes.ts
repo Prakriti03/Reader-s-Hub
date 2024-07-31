@@ -6,6 +6,8 @@ import { showLibrary } from "../views/home/librarySection";
 import { fetchStoryData } from "../views/readings/getStory";
 import { IParams } from "../interfaces/story.interfaces";
 import { getListOfChapters } from "../views/readings/chaptersList.readings";
+import { getChapterByNumber } from "../services/chapters.services";
+import { getChapter } from "../views/readings/chapters";
 
 const routes = [
   {
@@ -67,6 +69,29 @@ const routes = [
     },
   },
   {
+    path: "/stories/:id/chapter/:number",
+    action: async ({ params }: { params: IParams }) => {
+      const { id, number } = params;
+      const response = await getChapter(id!, number!);
+      
+      console.log(`Response in router : ${response}`);
+      return response;
+    },
+  },
+
+  {
+    path: "/stories/:id/chapter/:number/writing-interface",
+    action: async () => {
+      try {
+        const htmlContent = await fetch("/src/views/writings/writeStory.html");
+
+        return htmlContent.text();
+      } catch (error) {
+        return `<p>Error loading content</p>`;
+      }
+    },
+  },
+  {
     path: "/library",
     action: async () => {
       const response = await showLibrary();
@@ -81,20 +106,6 @@ const routes = [
       await fetch("./src/views/writings/addStory.html").then((response) =>
         response.text()
       ),
-  },
-  {
-    path: "/stories/:id/chapter/:number/writing-interface",
-    action: async () => {
-      try {
-        const htmlContent = await fetch(
-          "/src/views/writings/writeStory.html"
-        )
-
-        return htmlContent.text();
-      } catch (error) {
-        return `<p>Error loading content</p>`;
-      }
-    },
   },
 ];
 

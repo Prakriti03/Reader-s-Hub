@@ -11,6 +11,7 @@ export interface IStories {
 
 export interface IParams{
   id?: string
+  number ?:number
 }
 
 export interface IChapterPayload{

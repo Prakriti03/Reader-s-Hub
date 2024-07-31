@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/pdfjs-dist": "^2.10.378",
     "@types/universal-router": "^8.0.0",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.40",
@@ -21,6 +22,7 @@
     "axios": "^1.7.2",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
+    "pdfjs-dist": "^4.5.136",
     "quill": "^2.0.2",
     "universal-router": "^9.2.0"
   }

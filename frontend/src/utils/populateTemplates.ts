@@ -1,4 +1,4 @@
-import { IStories } from "../interfaces/story.interfaces";
+import { IChapterPayload, IStories } from "../interfaces/story.interfaces";
 
 export function populateTemplate(stories: IStories[]) {
   return stories
@@ -29,14 +29,17 @@ export function populateStoryTemplate(
   return template;
 }
 
-export function populateChaptersList(storyId: string, chapterCount: number): string {
+export function populateChaptersList(
+  storyId: string,
+  chapterCount: number
+): string {
   let chaptersHtml = "";
   for (let i = 1; i <= chapterCount; i++) {
     chaptersHtml += `
             <div class="p-4 bg-orange-100 rounded-lg shadow-md flex items-center justify-between">
         <span class="text-lg font-medium text-gray-700">Chapter ${i}</span>
         <div class="flex items-center space-x-4">
-          <button class="text-white bg-orange-500 hover:bg-orange-600 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          <button id="read-button-${storyId}-${i}" class="text-white bg-orange-500 hover:bg-orange-600 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline read-chapter" data-read-story="${storyId}" data-read-chapter="${i}">
             Read
           </button>
           <button class="text-red-500 hover:text-red-700 focus:outline-none delete-chapter"  data-story="${storyId}" data-chapter="${i}">
@@ -49,4 +52,13 @@ export function populateChaptersList(storyId: string, chapterCount: number): str
       `;
   }
   return chaptersHtml;
+}
+
+export function populateChapterTemplate(
+  template: string,
+  chapter: IChapterPayload
+): string {
+  return template
+    .replace(/{{topic}}/g, chapter.chapterTopic)
+    .replace(/{{content_url}}/g, chapter.content);
 }

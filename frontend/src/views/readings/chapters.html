@@ -1,0 +1,26 @@
+<!-- PDF Viewer -->
+<div id="pdf-viewer">
+  <iframe
+    id="pdf-content"
+    src=""
+    class="w-full h-full"
+    frameborder="0"
+  ></iframe>
+</div>
+
+<div
+  class="chapter-navigation flex justify-between items-center fixed bottom-0 w-full p-4"
+>
+  <button id="prev-chapter" class="bg-orange-700 text-white py-2 px-4 rounded">
+    Previous Chapter
+  </button>
+  <button id="next-chapter" class="bg-orange-700 text-white py-2 px-4 rounded">
+    Next Chapter
+  </button>
+</div>
+
+<style>
+  #pdf-content {
+    height: 90vh;
+  }
+</style>

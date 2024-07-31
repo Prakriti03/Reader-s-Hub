@@ -56,7 +56,6 @@ export const addChapter = async (
   storyId: string,
   number: number
 ) => {
-  number;
   const response = await axios.post(
     `${BASE_URL}${GET_POST_STORIES}/${storyId}${GET_CHAPTER}/${number}`,
     payload,
@@ -70,3 +69,27 @@ export const addChapter = async (
 
   return response.data;
 };
+
+export async function getChapterByNumber(
+  storyId: string,
+  chapterNumber: number
+) {
+  try {
+
+    const response = await axios.get(
+      `${BASE_URL}${GET_POST_STORIES}/${storyId}${GET_CHAPTER}/${chapterNumber}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    //response is array of objects???
+    console.log(response.data[0])
+    return response.data[0];
+  } catch (error) {
+    console.error("Error fetching chapters by chapter ID:", error);
+    throw error;
+  }
+}
