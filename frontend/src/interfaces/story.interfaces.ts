@@ -12,3 +12,8 @@ export interface IStories {
 export interface IParams{
   id?: string
 }
+
+export interface IChapterPayload{
+  chapterTopic : string,
+  content : string
+}

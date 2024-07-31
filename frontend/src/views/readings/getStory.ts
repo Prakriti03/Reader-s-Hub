@@ -1,10 +1,10 @@
-import { displayStoriesById } from "../../services/readStories.services";
+import { displayStoriesById } from "../../services/stories.services";
 import { populateStoryTemplate } from "../../utils/populateTemplates";
 
 export const fetchStoryData = async (storyId: string) => {
   try {
     const response = await displayStoriesById(storyId);
-    console.log(`response in fetchstorydata ${response.title}`);
+    `response in fetchstorydata ${response.title}`;
 
     const htmlFile = await fetch("/src/views/readings/getStory.html").then(
       (response) => response.text()

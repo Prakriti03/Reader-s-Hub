@@ -3,7 +3,7 @@ import { BaseModel } from "./base.model";
 
 export class UserModel extends BaseModel {
   static async createUser(user: IUser) {
-    console.log(`Profile picture inside model : ${user.profilePictureUrl}`);
+    `Profile picture inside model : ${user.profilePictureUrl}`;
     const userToCreate = {
       username: user.username,
       email: user.email,

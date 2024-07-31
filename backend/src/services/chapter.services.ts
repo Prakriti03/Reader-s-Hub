@@ -1,12 +1,9 @@
 import { IChapter } from "../interfaces/chapter.interface";
 import { ChapterModel } from "../models/chapter.model";
 
-export function addChapter(
-  chapter: IChapter,
-  chapterNumber: number,
-  storyId: string
-) {
-  const data = ChapterModel.create(chapter, chapterNumber, storyId);
+export function addChapter(chapter: IChapter, storyId: string) {
+  ("Inside addChapter service!!!");
+  const data = ChapterModel.create(chapter, storyId);
 
   return data;
 }

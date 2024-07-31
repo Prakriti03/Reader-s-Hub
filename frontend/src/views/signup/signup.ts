@@ -17,7 +17,6 @@ const handleSignUp = async (event: Event) => {
     document.getElementById("profilePictureInput") as HTMLInputElement
   ).files![0];
 
-  console.log(`profile picture from front end : ${profilePicture}`);
 
   const formData = new FormData(); 
 

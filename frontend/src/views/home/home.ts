@@ -1,4 +1,4 @@
-import { displayStories } from "../../services/homePage.services";
+
 import { loadSection } from "../../utils/loadSections";
 
 let menuOpen = false;

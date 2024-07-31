@@ -1,8 +1,7 @@
-import { navigateTo } from "../../scripts/eventHandlers/auth.eventhandler";
-import { addStoryWritings } from "../../services/writeStories.services";
+
+import { addStoryWritings } from "../../services/stories.services"; 
 
 export const addStory = async (event: Event) => {
-  console.log("inside add story!!!");
   // setLoading(true);
   event.preventDefault();
   const storyTitle = (
@@ -11,9 +10,7 @@ export const addStory = async (event: Event) => {
   const storyDescription = (
     document.getElementById("writings-story-description") as HTMLInputElement
   ).value;
-  //   const storyCoverImage = document.getElementById(
-  //     "cover-image"
-  //   ) as HTMLImageElement;
+
   const coverImage = (
     document.getElementById("coverImageInput") as HTMLInputElement
   ).files![0];

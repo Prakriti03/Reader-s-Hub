@@ -1,3 +1,5 @@
+import { getChaptersCount } from "../services/chapters.services";
+
 export var toolbarOptions = [
   ["bold", "italic", "underline"], 
   ["image"], 
@@ -11,3 +13,4 @@ export var toolbarOptions = [
   [{ align: [] }], 
   ["clean"],
 ];
+

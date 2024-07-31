@@ -8,10 +8,11 @@ import {
   getChapterByNumber,
   updateChapter,
 } from "../controller/chapter.controller";
+import { upload } from "../middlewares/upload.middleware"; 
 
 const route = express.Router({ mergeParams: true });
 
-route.post("/:number", authentication, authorizeStoryOwner, addChapter);
+route.post("/:number", authentication,authorizeStoryOwner,upload.single('file'), addChapter);
 route.get("/:number", authentication, getChapterByNumber);
 route.put("/:number", authentication, authorizeStoryOwner, updateChapter);
 route.delete("/:number", authentication, authorizeStoryOwner, deleteChapter);

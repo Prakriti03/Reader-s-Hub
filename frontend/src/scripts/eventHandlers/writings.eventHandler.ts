@@ -1,15 +1,49 @@
+import { CURRENT_PATH } from "../../constants/urls";
+import {
+  deleteChapter,
+  getChaptersCount,
+} from "../../services/chapters.services";
 import { addStory } from "../../views/writings/addStory";
-import { initializeEditor } from "../../views/writings/writeStory";
-import { convertToPdf } from "../../views/writings/writeStory";
+import { initializeEditor, saveContent } from "../../views/writings/writeStory";
+import { navigateTo } from "./auth.eventhandler";
 
 export const writingsEventListeners = () => {
-  console.log("Inside writings event listener");
+  ("Inside writings event listener");
   document.getElementById("create-story")?.addEventListener("submit", addStory);
   document
     .getElementById("chapter-topic")
     ?.addEventListener("focus", initializeEditor, { once: true });
 
+  document.getElementById("publish-button")?.addEventListener("click", () => {
+    const pathParts = (window.location.pathname).split("/");
+    const storyId = pathParts[2];
+    const chapterNumber = pathParts[4];
+
+    saveContent(storyId, parseInt(chapterNumber));
+  });
+
   document
-    .getElementById("publish-button")
-    ?.addEventListener("click", convertToPdf);
+    .getElementById("add-chapter-button")
+    ?.addEventListener("click", async () => {
+      const pathParts = CURRENT_PATH.split("/");
+      const storyId = pathParts[2];
+
+      const chapterCount = await getChaptersCount(storyId);
+      const nextChapterNumber = parseInt(chapterCount.data) + 1;
+
+      navigateTo(
+        `${window.location.pathname}/${nextChapterNumber}/writing-interface`
+      );
+    });
+
+  document.querySelectorAll(".delete-chapter").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const buttonElement = event.currentTarget as HTMLButtonElement;
+      const storyId = buttonElement.getAttribute("data-story");
+      const chapterNumber = Number(buttonElement.getAttribute("data-chapter"));
+      if (chapterNumber) {
+        deleteChapter(storyId!, chapterNumber);
+      }
+    });
+  });
 };

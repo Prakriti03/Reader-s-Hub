@@ -3,7 +3,7 @@ export interface IChapter {
   stories_id: string;
   number: number;
   title: string;
-  content_url: string;
+  contentUrl: string;
   status: string;
   image_url: string;
 }

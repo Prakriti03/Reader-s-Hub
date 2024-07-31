@@ -1,12 +1,10 @@
-import { GET_CHAPTER } from "../../constants/urls";
-import { displayStoriesById } from "../../services/readStories.services";
+import { CURRENT_PATH } from "../../constants/urls";
 import { navigateTo } from "./auth.eventhandler";
 
-
 export const readingsEventListeners = () => {
-    document.getElementById('start-reading-button')?.addEventListener("click",()=>{
-        const currentPath = window.location.pathname;
-        navigateTo(`${currentPath}/chapter`)
-    })
-
+  document
+    .getElementById("start-reading-button")
+    ?.addEventListener("click", () => {
+      navigateTo(`${CURRENT_PATH}/chapter`);
+    });
 };

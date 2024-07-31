@@ -16,7 +16,7 @@ export async function login(body: Pick<IUser, "email" | "password">) {
     existingUser.password
   );
 
-  console.log(`isValidPassword = ${isValidPassword}`);
+  `isValidPassword = ${isValidPassword}`;
 
   if (!isValidPassword) {
     return "Invalid credentials";

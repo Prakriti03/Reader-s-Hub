@@ -12,7 +12,7 @@ export const authorizeStoryOwner = async (req: Request, res: Response, next: Nex
       return res.status(404).json({ error: "Story not found" });
     }
     if (story.user_id !== userId) {
-      return res.status(403).json({ error: "You are not authorized to modify this story" });
+      return res.status(403).json( "You are not authorized to modify this story" );
     }
     next();
   } catch (error) {

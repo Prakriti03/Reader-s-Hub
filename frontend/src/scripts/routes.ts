@@ -1,11 +1,9 @@
 import UniversalRouter from "universal-router";
 import { isAuthenticated } from "../utils/token";
 import { navigateTo } from "./eventHandlers/auth.eventhandler";
-import { addHtmlSections } from "../views/home/home";
 import { showStories } from "../views/home/storiesSection";
 import { showLibrary } from "../views/home/librarySection";
 import { fetchStoryData } from "../views/readings/getStory";
-import { displayStoriesById } from "../services/readStories.services";
 import { IParams } from "../interfaces/story.interfaces";
 import { getListOfChapters } from "../views/readings/chaptersList.readings";
 
@@ -54,29 +52,24 @@ const routes = [
   },
   {
     path: "/stories/:id",
-    action: async({params}:{params:IParams})=> {
-      const {id} = params;
+    action: async ({ params }: { params: IParams }) => {
+      const { id } = params;
       const response = await fetchStoryData(id!);
-      console.log(`response is ${response}`)
       return response;
     },
-      
   },
   {
     path: "/stories/:id/chapter",
-    action: async({params}:{params:IParams})=> {
-      const {id} = params;
+    action: async ({ params }: { params: IParams }) => {
+      const { id } = params;
       const response = await getListOfChapters(id!);
-      console.log(`response is ${response}`)
       return response;
     },
-      
   },
   {
     path: "/library",
     action: async () => {
       const response = await showLibrary();
-      console.log(`final output = ${response}`);
 
       return response;
     },
@@ -90,11 +83,18 @@ const routes = [
       ),
   },
   {
-    path: "/writing-interface",
-    action: async () =>
-      await fetch("./src/views/writings/writeStory.html").then((response) =>
-        response.text()
-      ),
+    path: "/stories/:id/chapter/:number/writing-interface",
+    action: async () => {
+      try {
+        const htmlContent = await fetch(
+          "/src/views/writings/writeStory.html"
+        )
+
+        return htmlContent.text();
+      } catch (error) {
+        return `<p>Error loading content</p>`;
+      }
+    },
   },
 ];
 

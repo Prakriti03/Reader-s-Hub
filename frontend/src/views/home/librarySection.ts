@@ -5,7 +5,6 @@ import { populateTemplate } from "../../utils/populateTemplates";
 export const showLibrary = async () => {
   try {
     const data = await displayLibrary();
-    console.log(`data = ${data}`);
     const htmlFile = await fetch("/src/views/home/librarySection.html").then(
       (response) => response.text()
     );

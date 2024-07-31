@@ -1,12 +1,10 @@
-import { displayChaptersByStory } from "../../services/readStories.services";
+import { getChaptersCount } from "../../services/chapters.services"; 
 import { populateChaptersList } from "../../utils/populateTemplates";
 
 export const getListOfChapters = async (storyId: string) => {
   try {
-    const response = await displayChaptersByStory(storyId);
+    const response = await getChaptersCount(storyId);
     const chapterCount = response.data;
-
-    console.log(`Response in getListOfChapter : ${response.data}`)
 
     const htmlFile = await fetch("/src/views/readings/chaptersList.html").then(
       (response) => response.text()
@@ -18,7 +16,7 @@ export const getListOfChapters = async (storyId: string) => {
     const chaptersContainer = tempElement.querySelector("#chapters-container");
 
     if (chaptersContainer) {
-      const chaptersHtml = populateChaptersList(chapterCount);
+      const chaptersHtml = populateChaptersList(storyId, chapterCount);
       chaptersContainer.innerHTML = chaptersHtml;
     }
 
@@ -28,3 +26,4 @@ export const getListOfChapters = async (storyId: string) => {
     throw error;
   }
 };
+
