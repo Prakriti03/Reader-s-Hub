@@ -33,6 +33,29 @@
         ></textarea>
       </div>
 
+      <!-- Genre Input -->
+      <div class="mb-6">
+        <label for="genre" class="block text-sm font-medium text-gray-700"
+          >Genre</label
+        >
+        <div class="flex items-center">
+          <select
+            id="genre-select"
+            name="genre"
+            class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+          >
+          </select>
+          <button
+            type="button"
+            id="add-genre-button"
+            class="ml-4 rounded-md bg-gray-900 px-6 py-2 text-sm font-medium text-white"
+          >
+            Add
+          </button>
+        </div>
+        <ul id="selected-genres" class="mt-2"></ul>
+      </div>
+
       <!-- Cover Image Upload -->
       <div class="mb-6">
         <label for="coverImage" class="block text-sm font-medium text-gray-700"

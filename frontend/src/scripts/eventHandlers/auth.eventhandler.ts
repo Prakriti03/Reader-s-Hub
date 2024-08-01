@@ -6,8 +6,8 @@ import { writingsEventListeners } from "./writings.eventHandler";
 import { readingsEventListeners } from "./readings.eventHandlers";
 
 export const addEventListeners = () => {
-  readingsEventListeners();
   writingsEventListeners();
+  readingsEventListeners();
   homeEventListeners();
   document
     .getElementById("home-link")

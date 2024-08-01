@@ -13,7 +13,7 @@ export async function addStoryWritings(storyData: FormData) {
           "Content-Type": "multipart/form-data",
         },
       }
-    );
+    );  
     return response.data;
   } catch (error) {
     return error;
@@ -33,3 +33,5 @@ export const displayStoriesById = async (id: string) => {
     return error;
   }
 };
+
+

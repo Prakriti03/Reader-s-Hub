@@ -4,17 +4,15 @@ import { BaseModel } from "./base.model";
 export class StoryModel extends BaseModel {
   static async createStory(story: IStories, userId: string) {
     const storyToCreate = {
-      id: story.id,
       title: story.title,
       description: story.description,
       user_id: userId,
       cover_image_url: story.coverImageUrl,
     };
 
-    const query = this.queryBuilder().insert(storyToCreate).table("Stories");
-    const data = await query;
+    const query = await this.queryBuilder().insert(storyToCreate).table("Stories").returning(['id','title']);
 
-    return data;
+    return query;
   }
 
   static async getStories() {

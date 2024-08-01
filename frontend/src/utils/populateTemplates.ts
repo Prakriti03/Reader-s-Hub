@@ -1,4 +1,9 @@
-import { IChapterPayload, IStories } from "../interfaces/story.interfaces";
+import {
+  IChapterPayload,
+  IGenre,
+  IStories,
+} from "../interfaces/story.interfaces";
+import { fetchGenres } from "../views/writings/addStory";
 
 export function populateTemplate(stories: IStories[]) {
   return stories
@@ -62,3 +67,37 @@ export function populateChapterTemplate(
     .replace(/{{topic}}/g, chapter.chapterTopic)
     .replace(/{{content_url}}/g, chapter.content);
 }
+
+export const populateGenreList = async () => {
+  try {
+    const genres = await fetchGenres();
+
+
+    const htmlFile = await fetch("/src/views/writings/addStory.html").then(
+      (response) => response.text()
+    );
+    const tempElement = document.createElement("div");
+    tempElement.innerHTML = htmlFile;
+
+    const genreContainer = tempElement.querySelector("#genre-select");
+
+    if (genreContainer) {
+      genres.forEach((genre: IGenre) => {
+        const genreItem = document.createElement("option");
+        genreItem.textContent = genre.genre;
+        genreItem.dataset.genreId = genre.id;
+        console.log(`genre : ${genreItem.textContent}, genre_id :${genreItem.dataset.genreId}`)
+        genreContainer.appendChild(genreItem);
+      });
+    }
+    if (document.getElementById("genre-list-placeholder")) {
+      document.getElementById("genre-list-placeholder")!.innerHTML =
+        tempElement.innerHTML;
+    }
+
+    return tempElement.innerHTML;
+  } catch (error) {
+    console.error("Error populating genre list:", error);
+  }
+};
+

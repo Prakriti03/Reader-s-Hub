@@ -8,7 +8,7 @@ export async function createStory(req: Request, res: Response) {
     const userId= req.user?.id;
     const coverImage = req.file;
     try {
-
+      
       const result = await cloudinary.uploader.upload(coverImage!.path, {
         folder: 'story-coverImages',
       });
@@ -17,7 +17,7 @@ export async function createStory(req: Request, res: Response) {
         coverImageUrl : result.secure_url,
       }
       const data =  await StoryService.createStory(storyData,userId as string);
-      res.json(body);
+      res.json(data);
     } catch (error) {
       res.json(error);
     }

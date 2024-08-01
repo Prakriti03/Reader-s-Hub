@@ -3,19 +3,25 @@ import {
   deleteChapter,
   getChaptersCount,
 } from "../../services/chapters.services";
-import { addStory } from "../../views/writings/addStory";
+import { addGenre, addStory } from "../../views/writings/addStory";
 import { initializeEditor, saveContent } from "../../views/writings/writeStory";
 import { navigateTo } from "./auth.eventhandler";
 
 export const writingsEventListeners = () => {
-  ("Inside writings event listener");
+
+
+  document
+    .getElementById("add-genre-button")
+    ?.addEventListener("click", addGenre);
+
   document.getElementById("create-story")?.addEventListener("submit", addStory);
+  
   document
     .getElementById("chapter-topic")
     ?.addEventListener("focus", initializeEditor, { once: true });
 
   document.getElementById("publish-button")?.addEventListener("click", () => {
-    const pathParts = (window.location.pathname).split("/");
+    const pathParts = window.location.pathname.split("/");
     const storyId = pathParts[2];
     const chapterNumber = pathParts[4];
 

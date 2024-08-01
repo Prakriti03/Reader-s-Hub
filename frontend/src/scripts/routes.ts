@@ -8,6 +8,7 @@ import { IParams } from "../interfaces/story.interfaces";
 import { getListOfChapters } from "../views/readings/chaptersList.readings";
 import { getChapterByNumber } from "../services/chapters.services";
 import { getChapter } from "../views/readings/chapters";
+import { populateGenreList } from "../utils/populateTemplates";
 
 const routes = [
   {
@@ -73,7 +74,7 @@ const routes = [
     action: async ({ params }: { params: IParams }) => {
       const { id, number } = params;
       const response = await getChapter(id!, number!);
-      
+
       console.log(`Response in router : ${response}`);
       return response;
     },
@@ -102,10 +103,11 @@ const routes = [
 
   {
     path: "/write",
-    action: async () =>
-      await fetch("./src/views/writings/addStory.html").then((response) =>
-        response.text()
-      ),
+    action: async () => {
+      const response = await populateGenreList();
+      console.log(`response in router : ${response}`)
+      return response;
+    },
   },
 ];
 
