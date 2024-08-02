@@ -9,3 +9,10 @@ export interface IGenreStory {
   stories_id: string;
   genre_id: string;
 }
+
+export interface IReview {
+  userId: string;
+  storyId: string;
+  rating: number;
+  comment: string;
+}

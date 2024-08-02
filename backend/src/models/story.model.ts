@@ -113,7 +113,10 @@ export class StoryModel extends BaseModel {
   }
 
   static async getTotalStoriesCount() {
-    const query = this.queryBuilder().table("Stories").count('* as count').first();
+    const query = this.queryBuilder()
+      .table("Stories")
+      .count("* as count")
+      .first();
     const data = await query;
 
     return data.count;
