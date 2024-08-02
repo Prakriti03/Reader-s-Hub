@@ -4,9 +4,10 @@ export interface IStories {
   description: string;
   user_id?: string;
   cover_image_url: string;
-  genre: string;
+  genres: string[];
   reviews?: string[];
   ratings?: number;
+  username ?:string;
 }
 
 export interface IParams {

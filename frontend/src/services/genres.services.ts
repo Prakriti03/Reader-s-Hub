@@ -31,3 +31,4 @@ export const getGenres= async()=>{
         return error
     }
   }
+

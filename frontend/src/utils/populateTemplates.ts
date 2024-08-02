@@ -9,10 +9,21 @@ export function populateTemplate(stories: IStories[]) {
   return stories
     .map(
       (story) => `
-      <div class="bg-white p-4 rounded-lg shadow-md">
+       <div class="bg-white rounded-lg shadow-md overflow-hidden" id= "story-card-${story.id}">
+      <img class="w-full h-48 object-cover" src="${
+        story.cover_image_url
+      }" alt="${story.title}">
+      <div class="p-4">
         <h3 class="text-lg font-semibold">${story.title}</h3>
-        <p class="text-gray-600">${story.description}</p>
+        <p class="text-gray-600">Author : ${story.username}</p>
+        <p class="text-gray-600">Genre : ${story.genres}</p>
+
+        <div class="mt-2">
+          ${createRatingStars(story.ratings!)}
+        </div>
+      <a href= "${window.location.pathname}/${story.id}">More Details </a>
       </div>
+    </div>
     `
     )
     .join("");
@@ -26,7 +37,10 @@ export function populateStoryTemplate(
     .replace(/{{coverImage}}/g, story.cover_image_url)
     .replace(/{{topic}}/g, story.title)
     .replace(/{{author}}/g, story.user_id!)
-    .replace(/{{genre}}/g, story.genre)
+    // .replace(
+    //   /{{reviews}}/g,
+    //   story.genres.map((genre) => `<p>${genre}</p>`).join("")
+    // )
     // .replace(/{{ratings}}/g, getStarRating(story.ratings))
     .replace(/{{description}}/g, story.description);
   // .replace(/{{reviews}}/g, story.reviews.map(review => `<p>${review}</p>`).join(''));
@@ -72,7 +86,6 @@ export const populateGenreList = async () => {
   try {
     const genres = await fetchGenres();
 
-
     const htmlFile = await fetch("/src/views/writings/addStory.html").then(
       (response) => response.text()
     );
@@ -86,7 +99,7 @@ export const populateGenreList = async () => {
         const genreItem = document.createElement("option");
         genreItem.textContent = genre.genre;
         genreItem.dataset.genreId = genre.id;
-        console.log(`genre : ${genreItem.textContent}, genre_id :${genreItem.dataset.genreId}`)
+
         genreContainer.appendChild(genreItem);
       });
     }
@@ -101,3 +114,31 @@ export const populateGenreList = async () => {
   }
 };
 
+export function createStoryCard(story: IStories): string {
+  return `
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+      <img class="w-full h-48 object-cover" src="${
+        story.cover_image_url
+      }" alt="${story.title}">
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">${story.title}</h3>
+        <p class="text-gray-600">by ${story.user_id}</p>
+        <div class="mt-2">
+          ${createRatingStars(story.ratings!)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+export function createRatingStars(rating: number): string {
+  const fullStars = Math.floor(rating);
+  const halfStar = rating % 1 !== 0;
+  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+  return `
+    ${'<span class="text-yellow-500">★</span>'.repeat(fullStars)}
+    ${halfStar ? '<span class="text-yellow-500">★</span>' : ""}
+    ${'<span class="text-gray-400">★</span>'.repeat(emptyStars)}
+  `;
+}

@@ -27,11 +27,10 @@ export async function saveContent(storyId: string, chapterNumber: number) {
     chapterNumber: chapterNumber,
   };
 
-  console.log(`chapter number in frontend : ${chapterNumber}`);
 
   try {
     const response = await addChapter(payload, storyId, chapterNumber);
-    console.log(response);
+
     alert(response);
   } catch (error) {
     console.log(error);

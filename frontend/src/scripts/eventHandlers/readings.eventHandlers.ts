@@ -1,11 +1,11 @@
-import { BASE_URL, CURRENT_PATH, GET_POST_STORIES } from "../../constants/urls";
+import { BASE_URL, GET_POST_STORIES } from "../../constants/urls";
 import { navigateTo } from "./auth.eventhandler";
 
 export const readingsEventListeners = () => {
   document
     .getElementById("start-reading-button")
     ?.addEventListener("click", () => {
-      navigateTo(`${CURRENT_PATH}/chapter`);
+      navigateTo(`${window.location.pathname}/chapter`);
     });
 
   document.querySelectorAll(".read-chapter").forEach((button) => {

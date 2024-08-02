@@ -37,9 +37,7 @@ export const addStory = async (event: Event) => {
     }));
 
     const genreStoryResponse = await mapGenreStory(genreStoryMap);
-    console.log(genreStoryResponse)
 
-    console.log(genreStoryMap);
     alert(JSON.stringify(response));
   } catch (error) {
     return error;
@@ -58,8 +56,6 @@ export const addGenre = () => {
 
   if (selectedGenreId) {
     listOfGenresId.push(selectedGenreId);
-    console.log(`Selected genre ID: ${selectedGenreId}`);
-    console.log(`List of Genre IDs: ${listOfGenresId}`);
   } else {
     console.log("No genre ID found for the selected option.");
   }

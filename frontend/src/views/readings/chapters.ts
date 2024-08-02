@@ -5,7 +5,6 @@ export const getChapter = async (storyId: string, chapterNumber: number) => {
   try {
     const response = await getChapterByNumber(storyId, chapterNumber);
 
-    console.log(`chapter in getChapter : ${response.title}`);
 
     const htmlFile = await fetch("/src/views/readings/chapters.html").then(
       (response) => response.text()

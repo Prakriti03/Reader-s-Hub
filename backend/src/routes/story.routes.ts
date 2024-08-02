@@ -15,7 +15,7 @@ const route = express();
 
 route.post("/", authentication,upload.single("coverImage"), createStory);
 route.get("/:id", authentication, getStoryById);
-route.get("/", getStories);
+route.get("/",authentication, getStories);
 route.put("/:id", authentication, updateStory);
 route.delete("/:id", authentication, deleteStory);
 

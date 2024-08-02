@@ -75,10 +75,10 @@ const routes = [
       const { id, number } = params;
       const response = await getChapter(id!, number!);
 
-      console.log(`Response in router : ${response}`);
       return response;
     },
   },
+
 
   {
     path: "/stories/:id/chapter/:number/writing-interface",
@@ -105,10 +105,10 @@ const routes = [
     path: "/write",
     action: async () => {
       const response = await populateGenreList();
-      console.log(`response in router : ${response}`)
       return response;
     },
   },
+
 ];
 
 const router = new UniversalRouter(routes);

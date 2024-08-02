@@ -10,13 +10,28 @@ export class StoryModel extends BaseModel {
       cover_image_url: story.coverImageUrl,
     };
 
-    const query = await this.queryBuilder().insert(storyToCreate).table("Stories").returning(['id','title']);
+    const query = await this.queryBuilder()
+      .insert(storyToCreate)
+      .table("Stories")
+      .returning(["id", "title"]);
 
     return query;
   }
 
   static async getStories() {
-    const query = this.queryBuilder().select("*").table("Stories");
+    const query = this.queryBuilder()
+      .select(
+        "Stories.*",
+        "Users.username",
+        this.queryBuilder().raw('array_agg("Genres".genre) as genres')
+      )
+      .from("Stories")
+      .leftJoin("Users", "Stories.user_id", "Users.id")
+      .leftJoin("Story-Genre", "Stories.id", "Story-Genre.stories_id")
+      .leftJoin("Genres", "Story-Genre.genre_id", "Genres.id")
+      .groupBy("Stories.id", "Users.username")
+      .returning("*");
+
     const data = await query;
 
     return data;
@@ -32,6 +47,28 @@ export class StoryModel extends BaseModel {
 
     return data;
   }
+
+  static async getStoriesByGenre(genre?: string) {
+    const query = this.queryBuilder()
+      .select(
+        "Stories.*",
+        "Users.username",
+        "Genres.genre",
+        this.queryBuilder().raw('array_agg("Genres".genre) as genres')
+      )
+      .from("Stories")
+      .leftJoin("Users", "Stories.user_id", "Users.id")
+      .leftJoin("Story-Genre", "Stories.id", "Story-Genre.stories_id")
+      .leftJoin("Genres", "Story-Genre.genre_id", "Genres.id")
+      .where("Genres.genre", genre)
+      .groupBy("Stories.id", "Users.username", "Genres.genre")
+      .returning("*");
+
+    const data = await query;
+
+    return data;
+  }
+
   static async updateStory(id: string, story: IStories, userId: string) {
     const updatedStory = {
       title: story.title,

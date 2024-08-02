@@ -1,4 +1,3 @@
-import { CURRENT_PATH } from "../../constants/urls";
 import {
   deleteChapter,
   getChaptersCount,
@@ -31,7 +30,7 @@ export const writingsEventListeners = () => {
   document
     .getElementById("add-chapter-button")
     ?.addEventListener("click", async () => {
-      const pathParts = CURRENT_PATH.split("/");
+      const pathParts = window.location.pathname.split("/");
       const storyId = pathParts[2];
 
       const chapterCount = await getChaptersCount(storyId);

@@ -24,7 +24,8 @@ export async function createStory(req: Request, res: Response) {
 
 }
 export async function getStories(req:Request,res:Response) {
-  const data = await StoryService.getStories();
+  const genre = req.query.genre as string;
+  const data = await StoryService.getStories(genre);
   res.json(data);
 }
 

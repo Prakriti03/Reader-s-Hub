@@ -6,4 +6,3 @@ export const GET_LIBRARY = "/library";
 
 export const GET_CHAPTER = "/chapter";
 
-export const CURRENT_PATH = window.location.pathname;
