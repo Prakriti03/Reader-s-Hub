@@ -1,18 +1,34 @@
 import {  Response } from "express";
 import { Request } from "../interfaces/auth.interface";
 import * as StoryService from "../services/story.services";
+import { cloudinary } from "../config/cloudinary.config";
 
 export async function createStory(req: Request, res: Response) {
     const { body } = req;
     const userId= req.user?.id;
+    const coverImage = req.file;
     try {
-      const data =  await StoryService.createStory(body,userId as string);
-      res.json(body);
+      
+      const result = await cloudinary.uploader.upload(coverImage!.path, {
+        folder: 'story-coverImages',
+      });
+      const storyData = {
+        ...body,
+        coverImageUrl : result.secure_url,
+      }
+      const data =  await StoryService.createStory(storyData,userId as string);
+      res.json(data);
     } catch (error) {
       res.json(error);
     }
 
 }
+export async function getStories(req:Request,res:Response) {
+  const genre = req.query.genre as string;
+  const data = await StoryService.getStories(genre);
+  res.json(data);
+}
+
 export async function getStoryById(req: Request, res: Response) {
     const { id } = req.params;
 

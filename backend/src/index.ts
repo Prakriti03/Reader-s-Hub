@@ -1,13 +1,17 @@
 import express, { Router } from "express";
 import route from "./routes/index.routes";
-import config from "./config";
+import config from "./config/config";
 import cors from "cors";
+import path from "path";
+import bodyParser from "body-parser";
 
 const app = express();
 
 app.use(cors());
+app.use("/uploads", express.static(path.join(__dirname, "../public/uploads")));
 
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(route);
 
 app.get("/", (req, res) => {

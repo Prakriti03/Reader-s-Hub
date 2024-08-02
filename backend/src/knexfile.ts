@@ -1,5 +1,5 @@
-import  { Knex } from "knex";
-import config from "./config";
+import { Knex } from "knex";
+import config from "./config/config";
 
 export const baseKnexConfig: Knex.Config = {
   client: config.database.client,
