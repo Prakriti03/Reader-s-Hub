@@ -5,15 +5,19 @@ import {
   deleteStory,
   getStories,
   getStoryById,
+  getTotalStoriesCount,
   updateStory,
 } from "../controller/story.controller";
 
 import { authentication, authorize } from "../middlewares/auth.middleware";
 import { upload } from "../middlewares/upload.middleware";
+import { getTotalStoriesCountByGenre } from "../controller/story.controller";
 
 const route = express();
 
 route.post("/", authentication,upload.single("coverImage"), createStory);
+route.get("/count", authentication, getTotalStoriesCount);
+route.get("/genre-count",authentication, getTotalStoriesCountByGenre)
 route.get("/:id", authentication, getStoryById);
 route.get("/",authentication, getStories);
 route.put("/:id", authentication, updateStory);

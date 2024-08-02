@@ -25,7 +25,9 @@ export async function createStory(req: Request, res: Response) {
 }
 export async function getStories(req:Request,res:Response) {
   const genre = req.query.genre as string;
-  const data = await StoryService.getStories(genre);
+  const limit = parseInt(req.query.limit as string, 10) || 10; //default limit
+  const offset = parseInt(req.query.offset as string, 10) || 0;
+  const data = await StoryService.getStories(limit, offset, genre);
   res.json(data);
 }
 
@@ -50,4 +52,15 @@ export async function deleteStory(req: Request, res: Response) {
     const data = await StoryService.deleteStory(id, userId as string);
   
     res.json(data);
+}
+export async function getTotalStoriesCount(req:Request, res: Response) {
+  const data = await StoryService.getTotalStoriesCount();
+
+  res.json(data)
+}
+export async function getTotalStoriesCountByGenre(req:Request, res:Response) {
+  const genre = req.query.genre as string;
+  const data = await StoryService.getTotalStoriesCountByGenre(genre );
+
+  res.json(data)
 }

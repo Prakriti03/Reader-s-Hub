@@ -48,8 +48,10 @@ const routes = [
   //for checking : combine all below to the home page
   {
     path: "/stories",
-    action: async () => {
-      const response = await showStories();
+    action: async (context: any) => {
+      const urlParams = new URLSearchParams(context.querystring);
+      const page = urlParams.get("page") ? parseInt(urlParams.get("page")!) : 1;
+      const response = await showStories(page);
       return response;
     },
   },

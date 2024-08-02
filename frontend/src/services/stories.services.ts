@@ -2,6 +2,7 @@ import axios from "axios";
 import { BASE_URL, GET_POST_STORIES } from "../constants/urls";
 import { token } from "../utils/authHelpers";
 import { IGenre } from "../interfaces/story.interfaces";
+import { INITIAL_OFFSET, LIMIT } from "../constants/writings";
 
 export async function addStoryWritings(storyData: FormData) {
   try {
@@ -35,14 +36,55 @@ export const displayStoriesById = async (id: string) => {
   }
 };
 
-export const filterByGenre = async (genre: string) => {
+export const filterByGenre = async (genre: string, offset : number) => {
   try {
-    const response = await axios.get(`${BASE_URL}/stories?genre=${genre}`, {
+    const response = await axios.get(`${BASE_URL}/stories`, {
+      params: {
+        limit: LIMIT,
+        offset: offset,
+        genre: genre,
+      },
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const displayStories = async (offset : number) => {
+  try {
+    const response = await axios.get(`${BASE_URL}${GET_POST_STORIES}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      params: {
+        limit: LIMIT,
+        offfset: offset,
+      },
+    });
+
+    console.log(`response for displaying stories : ${response.data}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const countStories = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}${GET_POST_STORIES}/count`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log(`count of stories : ${response.data}`);
     return response.data;
   } catch (error) {
     return error;
