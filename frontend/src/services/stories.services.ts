@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL, GET_POST_STORIES } from "../constants/urls";
 import { token } from "../utils/authHelpers";
-import { IGenre } from "../interfaces/story.interfaces";
+import { IGenre, IStories } from "../interfaces/story.interfaces";
 import { INITIAL_OFFSET, LIMIT } from "../constants/writings";
 
 export async function addStoryWritings(storyData: FormData) {
@@ -36,7 +36,7 @@ export const displayStoriesById = async (id: string) => {
   }
 };
 
-export const filterByGenre = async (genre: string, offset : number) => {
+export const filterByGenre = async (genre: string, offset: number) => {
   try {
     const response = await axios.get(`${BASE_URL}/stories`, {
       params: {
@@ -55,9 +55,9 @@ export const filterByGenre = async (genre: string, offset : number) => {
   }
 };
 
-export const displayStories = async (offset : number) => {
+export const displayStories = async ( offset: number) => {
   try {
-    const response = await axios.get(`${BASE_URL}${GET_POST_STORIES}`, {
+    const storyResponse = await axios.get(`${BASE_URL}${GET_POST_STORIES}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -68,8 +68,26 @@ export const displayStories = async (offset : number) => {
       },
     });
 
-    console.log(`response for displaying stories : ${response.data}`);
-    return response.data;
+    const stories = storyResponse.data;
+
+    const mergedDataPromises = stories.map(async (story:IStories) => {
+      const reviewResponse = await axios.get(`${BASE_URL}/review/${story.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const reviews = reviewResponse.data;
+      return {
+        ...story,
+        reviews: reviews ,
+      };
+    });
+
+    const mergedData = await Promise.all(mergedDataPromises);
+
+    return mergedData;
   } catch (error) {
     return error;
   }

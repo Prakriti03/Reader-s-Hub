@@ -18,8 +18,6 @@ export const showStories = async (page: number = 1) => {
       countStories(),
     ]);
 
-    console.log(data)
-
 
     const htmlFile = await fetch("/src/views/home/storiesSection.html").then(
       (response) => response.text()
@@ -30,10 +28,6 @@ export const showStories = async (page: number = 1) => {
     const tempElement = document.createElement("div");
 
     tempElement.innerHTML = htmlFile;
-    const container = tempElement.querySelector("#story-cards-container");
-    if (container) {
-      container.innerHTML = storyCardsHtml;
-    }
 
     //populate the genre filter dropdown
     const genreSelect = tempElement.querySelector("#genre-filter");
@@ -45,6 +39,12 @@ export const showStories = async (page: number = 1) => {
         genreSelect.appendChild(option);
       });
     }
+
+    const container = tempElement.querySelector("#story-cards-container");
+    if (container) {
+      container.innerHTML = storyCardsHtml;
+    }
+
 
     updatePaginationControls(storiesCount, page, showStories);
 

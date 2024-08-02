@@ -21,15 +21,34 @@ export class ReviewModel extends BaseModel {
   }
 
   static async getReviewsByStory(storyId: string) {
-    console.log(`story id is : ${storyId}`);
-    const query = this.queryBuilder()
-      .select("*")
+    const avgRatingQuery = this.queryBuilder()
+      .select(this.queryBuilder().raw("COALESCE(AVG(rating), 0) AS avgRating"))
       .table("Reviews")
       .where("stories_id", storyId);
 
-    const data = await query;
+    const commentsQuery = this.queryBuilder()
+      .select("comment")
+      .table("Reviews")
+      .where("stories_id", storyId);
 
-    return data;
+    const [avgRatingResult, commentsResult] = await Promise.all([
+      avgRatingQuery,
+      commentsQuery,
+    ]);
+
+    console.log(avgRatingResult[0])
+
+    const avgRating = avgRatingResult[0].avgrating;
+
+    console.log(`average rating : ${avgRating}`)
+
+    // Extract comments
+    const comments = commentsResult.map((row) => row.comment);
+
+    return {
+      avgRating,
+      comments,
+    };
   }
 
   static async updateReview(id: string, userId: string, review: IReview) {
@@ -52,14 +71,10 @@ export class ReviewModel extends BaseModel {
   }
 
   static async deleteReview(id: string, userId: string) {
-    const query = this.queryBuilder()
-      .del()
-      .table("Reviews")
-      .where({
-        id: id,
-        user_id: userId,
-      })
-      .returning("*");
+    const query = this.queryBuilder().del().table("Reviews").where({
+      id: id,
+      user_id: userId,
+    });
 
     const data = await query;
 

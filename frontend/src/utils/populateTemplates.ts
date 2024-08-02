@@ -5,11 +5,13 @@ import {
 } from "../interfaces/story.interfaces";
 import { fetchGenres } from "../views/writings/addStory";
 
-export function populateTemplate(stories: IStories[]) {
+export function populateTemplate(stories: any) {
   return stories
     .map(
-      (story) => `
-       <div class="bg-white rounded-lg shadow-md overflow-hidden" id= "story-card-${story.id}">
+      (story: IStories) => `
+       <div class="bg-white rounded-lg shadow-md overflow-hidden" id= "story-card-${
+         story.id
+       }">
       <img class="w-full h-48 object-cover" src="${
         story.cover_image_url
       }" alt="${story.title}">
@@ -19,7 +21,7 @@ export function populateTemplate(stories: IStories[]) {
         <p class="text-gray-600">Genre : ${story.genres}</p>
 
         <div class="mt-2">
-          ${createRatingStars(story.ratings!)}
+          ${createRatingStars(story.reviews?.avgRating)}
         </div>
       <a href= "${window.location.pathname}/${story.id}">More Details </a>
       </div>
@@ -114,31 +116,31 @@ export const populateGenreList = async () => {
   }
 };
 
-export function createStoryCard(story: IStories): string {
-  return `
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-      <img class="w-full h-48 object-cover" src="${
-        story.cover_image_url
-      }" alt="${story.title}">
-      <div class="p-4">
-        <h3 class="text-lg font-semibold">${story.title}</h3>
-        <p class="text-gray-600">by ${story.user_id}</p>
-        <div class="mt-2">
-          ${createRatingStars(story.ratings!)}
-        </div>
-      </div>
-    </div>
-  `;
-}
+// export function createStoryCard(story: IStories): string {
+//   return `
+//     <div class="bg-white rounded-lg shadow-md overflow-hidden">
+//       <img class="w-full h-48 object-cover" src="${
+//         story.cover_image_url
+//       }" alt="${story.title}">
+//       <div class="p-4">
+//         <h3 class="text-lg font-semibold">${story.title}</h3>
+//         <p class="text-gray-600">by ${story.user_id}</p>
+//         <div class="mt-2">
+//           ${createRatingStars(story.ratings!)}
+//         </div>
+//       </div>
+//     </div>
+//   `;
+// }
 
-export function createRatingStars(rating: number): string {
+export function createRatingStars(rating: number = 0): string {
   const fullStars = Math.floor(rating);
-  const halfStar = rating % 1 !== 0;
-  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+  const partialStar = rating % 1;
+  const roundedFullStars = partialStar >= 0.5 ? fullStars + 1 : fullStars;
+  const emptyStars = 5 - roundedFullStars;
 
   return `
-    ${'<span class="text-yellow-500">★</span>'.repeat(fullStars)}
-    ${halfStar ? '<span class="text-yellow-500">★</span>' : ""}
+    ${'<span class="text-yellow-500">★</span>'.repeat(roundedFullStars)}
     ${'<span class="text-gray-400">★</span>'.repeat(emptyStars)}
   `;
 }
