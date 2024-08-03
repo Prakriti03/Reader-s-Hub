@@ -13,6 +13,6 @@ export interface IGenreStory {
 export interface IReview {
   userId: string;
   storyId: string;
-  rating: number;
-  comment: string;
+  rating ?: number;
+  comment ?: string;
 }

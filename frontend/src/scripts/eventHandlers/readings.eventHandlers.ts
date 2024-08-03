@@ -1,5 +1,6 @@
 import { BASE_URL, GET_POST_STORIES } from "../../constants/urls";
 import { addInLibrary } from "../../views/home/librarySection";
+import { addReview } from "../../views/readings/getStory";
 import { navigateTo } from "./auth.eventhandler";
 
 export const readingsEventListeners = () => {
@@ -46,4 +47,6 @@ export const readingsEventListeners = () => {
       addInLibrary();
       navigateTo("/library");
     });
+
+    document.getElementById("add-comment-button")?.addEventListener("click",addReview)
 };

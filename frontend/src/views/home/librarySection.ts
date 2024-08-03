@@ -1,7 +1,7 @@
 import { displayLibrary } from "../../services/library.services";
 import { populateLibraryTemplate, populateTemplate } from "../../utils/populateTemplates";
 import { addToLibrary } from "../../services/library.services";
-import { fetchStories } from "../../utils/stories";
+import { fetchStories } from "../../services/stories.services";
 import { LIMIT } from "../../constants/writings";
 
 //talk of the town

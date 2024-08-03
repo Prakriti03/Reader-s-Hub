@@ -24,15 +24,33 @@ export async function addStoryWritings(storyData: FormData) {
 
 export const displayStoriesById = async (id: string) => {
   try {
-    const storyResponse = await axios.get(`${BASE_URL}${GET_POST_STORIES}/${id}`, {
+    const storyResponse = await axios.get(
+      `${BASE_URL}${GET_POST_STORIES}/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const story = storyResponse.data;
+
+    const reviewResponse = await axios.get(`${BASE_URL}/review/${story.id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
 
+    const reviews = reviewResponse.data;
 
-    return storyResponse.data;
+    console.log(reviews)
+
+    return {
+      ...story,
+      reviews: reviews,
+    };
   } catch (error) {
     return error;
   }
@@ -57,22 +75,25 @@ export const filterByGenre = async (genre: string, offset: number) => {
   }
 };
 
-export const displayStories = async ( offset: number) => {
+export async function fetchStories(
+  endpoint: string,
+  offset: number
+): Promise<any> {
   try {
-    const storyResponse = await axios.get(`${BASE_URL}${GET_POST_STORIES}`, {
+    const storyResponse = await axios.get(`${BASE_URL}${endpoint}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       params: {
         limit: LIMIT,
-        offfset: offset,
+        offset: offset,
       },
     });
 
     const stories = storyResponse.data;
 
-    const mergedDataPromises = stories.map(async (story:IStories) => {
+    const mergedDataPromises = stories.map(async (story: IStories) => {
       const reviewResponse = await axios.get(`${BASE_URL}/review/${story.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -83,7 +104,7 @@ export const displayStories = async ( offset: number) => {
       const reviews = reviewResponse.data;
       return {
         ...story,
-        reviews: reviews ,
+        reviews: reviews,
       };
     });
 
@@ -93,7 +114,7 @@ export const displayStories = async ( offset: number) => {
   } catch (error) {
     return error;
   }
-};
+}
 
 export const countStories = async () => {
   try {

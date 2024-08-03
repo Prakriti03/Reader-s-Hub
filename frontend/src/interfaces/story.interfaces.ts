@@ -30,11 +30,22 @@ export interface IGenreStory {
 }
 
 export interface IReview {
-  avgRating?: number;
-  comment?: string;
+  avgRating: number;
+  comments: IComments[];
+  
+}
+
+export interface IComments{
+  comment : string,
+  userProfilePicture : string | null;
 }
 
 export interface ILibrary {
   userId?: string;
   storyId: string;
+}
+
+export interface Review{
+  comment ?: string,
+  rating ?: number
 }

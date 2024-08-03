@@ -2,13 +2,13 @@ import { GET_POST_STORIES } from "../../constants/urls";
 import { LIMIT } from "../../constants/writings";
 import { IGenre } from "../../interfaces/story.interfaces";
 import { getGenres } from "../../services/genres.services";
-import { countStories, displayStories } from "../../services/stories.services";
+import { countStories } from "../../services/stories.services";
 import { filterByGenre } from "../../services/stories.services";
 import { updatePaginationControls } from "../../utils/pagination";
 import { populateTemplate } from "../../utils/populateTemplates";
-import { fetchStories } from "../../utils/stories";
+import { fetchStories } from "../../services/stories.services";
 
-//talk of the town
+
 export const showStories = async (page: number = 1) => {
   console.log(`page right now :${page}`)
   const offset = (page - 1) * parseInt(LIMIT);

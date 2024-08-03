@@ -7,6 +7,8 @@ export async function addReview(req: Request, res: Response) {
   const { storyId } = req.params;
   const { body } = req;
 
+  console.log(`story id for review : ${storyId}`)
+
   const data = await ReviewService.addReview(userId!, storyId, body);
 
   res.json(data);

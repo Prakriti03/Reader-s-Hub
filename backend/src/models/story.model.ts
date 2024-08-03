@@ -41,10 +41,19 @@ export class StoryModel extends BaseModel {
 
   static async getStoryById(id: string) {
     const query = this.queryBuilder()
-      .select("*")
-      .table("Stories")
-      .where("id", id)
+      .select(
+        "Stories.*",
+        "Users.username",
+        this.queryBuilder().raw('array_agg("Genres".genre) as genres')
+      )
+      .from("Stories")
+      .leftJoin("Users", "Stories.user_id", "Users.id")
+      .leftJoin("Story-Genre", "Stories.id", "Story-Genre.stories_id")
+      .leftJoin("Genres", "Story-Genre.genre_id", "Genres.id")
+      .where("Stories.id", id)
+      .groupBy("Stories.id", "Users.username")
       .first();
+
     const data = await query;
 
     return data;

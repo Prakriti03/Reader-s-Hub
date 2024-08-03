@@ -27,23 +27,27 @@ export class ReviewModel extends BaseModel {
       .where("stories_id", storyId);
 
     const commentsQuery = this.queryBuilder()
-      .select("comment")
+      .select("Reviews.comment", "Reviews.user_id", "Users.profilePictureUrl")
       .table("Reviews")
-      .where("stories_id", storyId);
+      .join("Users", "Reviews.user_id", "Users.id")
+      .where("Reviews.stories_id", storyId);
 
     const [avgRatingResult, commentsResult] = await Promise.all([
       avgRatingQuery,
       commentsQuery,
     ]);
 
-    console.log(avgRatingResult[0])
+    console.log(avgRatingResult[0]);
 
     const avgRating = avgRatingResult[0].avgrating;
 
-    console.log(`average rating : ${avgRating}`)
+    console.log(`average rating : ${avgRating}`);
 
     // Extract comments
-    const comments = commentsResult.map((row) => row.comment);
+    const comments = commentsResult.map((row) => ({
+      comment: row.comment,
+      userProfilePicture: row.profilePictureUrl,
+    }));
 
     return {
       avgRating,

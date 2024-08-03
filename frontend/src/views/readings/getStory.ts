@@ -1,3 +1,4 @@
+import { addComments } from "../../services/reviews.services";
 import { displayStoriesById } from "../../services/stories.services";
 import { populateStoryTemplate } from "../../utils/populateTemplates";
 
@@ -19,3 +20,19 @@ export const fetchStoryData = async (storyId: string) => {
     throw error;
   }
 };
+
+export async function addReview(){
+  const commentInput = (document.getElementById("comment-input")as HTMLInputElement).value;
+
+
+  const reviewToAdd = {
+    comment : commentInput
+  };
+  const storyId = ((window.location.pathname).split('/'))[2];
+
+  const response = await addComments(storyId,reviewToAdd);
+
+  console.log(response)
+
+
+}

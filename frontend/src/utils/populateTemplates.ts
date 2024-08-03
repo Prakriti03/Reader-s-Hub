@@ -50,7 +50,9 @@ export function populateLibraryTemplate(stories: any) {
         <div class="mt-2">
           ${createRatingStars(story.reviews?.avgRating)}
         </div>
-      <a href= "${GET_POST_STORIES}/${story.id}${GET_CHAPTER}">Continue Reading </a>
+      <a href= "${GET_POST_STORIES}/${
+        story.id
+      }${GET_CHAPTER}">Continue Reading </a>
       </div>
     </div>
     `
@@ -62,16 +64,38 @@ export function populateStoryTemplate(
   template: string,
   story: IStories
 ): string {
+  const { title, cover_image_url, username, genres, description, reviews } =
+    story;
+  const genreList = genres.join(", ");
+
   template = template
-    .replace(/{{coverImage}}/g, story.cover_image_url)
-    .replace(/{{topic}}/g, story.title)
-    .replace(/{{author}}/g, story.user_id!)
+    .replace(/{{coverImage}}/g, cover_image_url)
+    .replace(/{{topic}}/g, title)
+    .replace(/{{author}}/g, username!)
     // .replace(
     //   /{{reviews}}/g,
     //   story.genres.map((genre) => `<p>${genre}</p>`).join("")
     // )
     // .replace(/{{ratings}}/g, getStarRating(story.ratings))
-    .replace(/{{description}}/g, story.description);
+    .replace(/{{description}}/g, description)
+    .replace(/{genreList}/g, genreList)
+    .replace(/{ratings}/g, createRatingStars(reviews.avgRating))
+    .replace(
+      /{comments}/g,
+      reviews.comments
+        .map(
+          (comment) => `
+       <div class="flex items-start bg-gray-100 p-4 rounded-lg shadow-md">
+          <img src="${comment.userProfilePicture}" alt="profile-picture" class="w-10 h-10 rounded-full mr-4" />
+      <div>
+        <p class="text-gray-800">${comment.comment}</p>
+      </div>
+      </div>
+    `
+        )
+        .join("")
+    );
+  // .replace(/{ratings}/g, createRatingStars(reviews.avgRating))
   // .replace(/{{reviews}}/g, story.reviews.map(review => `<p>${review}</p>`).join(''));
 
   return template;
