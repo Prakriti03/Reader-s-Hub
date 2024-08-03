@@ -1,4 +1,5 @@
 import { BASE_URL, GET_POST_STORIES } from "../../constants/urls";
+import { addInLibrary } from "../../views/home/librarySection";
 import { navigateTo } from "./auth.eventhandler";
 
 export const readingsEventListeners = () => {
@@ -38,4 +39,11 @@ export const readingsEventListeners = () => {
     const newPathName = parts.join("/");
     navigateTo(newPathName);
   });
+
+  document
+    .getElementById("add-to-library-button")
+    ?.addEventListener("click", () => {
+      addInLibrary();
+      navigateTo("/library");
+    });
 };

@@ -66,4 +66,12 @@ export class UserModel extends BaseModel {
 
     return data;
   }
+
+  static async getUserById(id: string) {
+    const query = this.queryBuilder().table("Users").where("id", id).first();
+
+    const data = await query;
+
+    return data;
+  }
 }

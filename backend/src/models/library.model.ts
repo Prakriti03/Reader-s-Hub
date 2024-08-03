@@ -5,10 +5,23 @@ import { BaseModel } from "./base.model";
 export class LibraryModel extends BaseModel {
   static async getLibrary(userId: string) {
     const query = this.queryBuilder()
-      .select("Stories.*")
-      .from("Stories")
-      .join("Reading-List", "Stories.id", "=", "Reading-List.stories_id")
-      .where("Reading-List.user_id", userId);
+    .select(
+      'Stories.*',
+      'Users.username',
+      this.queryBuilder().raw('array_agg("Genres".genre) as genres')
+    )
+    .from('Reading-List')
+    .leftJoin('Stories', 'Reading-List.stories_id', 'Stories.id')
+    .leftJoin('Users', 'Stories.user_id', 'Users.id')
+    .leftJoin('Story-Genre', 'Stories.id', 'Story-Genre.stories_id')
+    .leftJoin('Genres', 'Story-Genre.genre_id', 'Genres.id')
+    .where('Reading-List.user_id', userId)
+    .groupBy('Stories.id', 'Users.username')
+    // .limit(limit)
+    // .offset(offset)
+    .returning('*');
+
+    
 
     const data = await query;
     return data;
@@ -17,10 +30,13 @@ export class LibraryModel extends BaseModel {
   static async addToLibrary(userId: string, library: ILibrary) {
     const entry = {
       user_id: userId,
-      stories_id: library.stories_id,
+      stories_id: library.storyId,
     };
 
-    const query = this.queryBuilder().insert(entry).table("Reading-List");
+    const query = this.queryBuilder()
+      .insert(entry)
+      .table("Reading-List")
+      .returning("*");
 
     const data = await query;
 

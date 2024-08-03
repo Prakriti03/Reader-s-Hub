@@ -1,3 +1,4 @@
+import { GET_POST_STORIES } from "../../constants/urls";
 import { LIMIT } from "../../constants/writings";
 import { IGenre } from "../../interfaces/story.interfaces";
 import { getGenres } from "../../services/genres.services";
@@ -5,6 +6,7 @@ import { countStories, displayStories } from "../../services/stories.services";
 import { filterByGenre } from "../../services/stories.services";
 import { updatePaginationControls } from "../../utils/pagination";
 import { populateTemplate } from "../../utils/populateTemplates";
+import { fetchStories } from "../../utils/stories";
 
 //talk of the town
 export const showStories = async (page: number = 1) => {
@@ -13,7 +15,7 @@ export const showStories = async (page: number = 1) => {
   console.log(`offset : ${offset}`)
   try {
     const [data, genres, storiesCount] = await Promise.all([
-      displayStories(offset),
+      fetchStories(GET_POST_STORIES,offset),
       getGenres(),
       countStories(),
     ]);
@@ -55,7 +57,7 @@ export const showStories = async (page: number = 1) => {
 };
 
 //too many repeated codes refactor here!
-export const showStoriesByGenre = async (page: number = 1) => {
+export const showStoriesByGenre = async (page:number=1) => {
   // event.preventDefault();
   const genreSelect = document.getElementById(
     "genre-filter"

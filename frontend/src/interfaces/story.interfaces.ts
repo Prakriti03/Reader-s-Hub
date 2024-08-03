@@ -5,8 +5,8 @@ export interface IStories {
   user_id?: string;
   cover_image_url: string;
   genres: string[];
-  reviews : IReview;
-  username ?:string;
+  reviews: IReview;
+  username?: string;
 }
 
 export interface IParams {
@@ -30,6 +30,11 @@ export interface IGenreStory {
 }
 
 export interface IReview {
-  avgRating ?: number
-  comment ?: string;
+  avgRating?: number;
+  comment?: string;
+}
+
+export interface ILibrary {
+  userId?: string;
+  storyId: string;
 }

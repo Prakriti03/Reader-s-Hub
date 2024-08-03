@@ -16,5 +16,7 @@ export const homeEventListeners = () => {
     .getElementById("browse-stories-button")
     ?.addEventListener("click", () => navigateTo("/stories"));
 
-    document.getElementById("apply-filters")?.addEventListener("click",showStoriesByGenre)
+    document.getElementById("apply-filters")?.addEventListener("click",showStoriesByGenre);
+
+    document.getElementById("view-library")?.addEventListener("click",()=>navigateTo("/library"))
 };

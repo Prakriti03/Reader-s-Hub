@@ -23,6 +23,11 @@ export function getUserByEmail(email: string) {
   return data;
 }
 
+export function getUserById(id : string){
+  const data = UserModel.getUserById(id);
+  return data;
+}
+
 export async function updateUser(userId: string, updatedUser: IUser) {
   if (updatedUser.password !== undefined) {
     const password = await bcrypt.hash(updatedUser.password, 10);

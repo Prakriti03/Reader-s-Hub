@@ -1,3 +1,4 @@
+import { GET_CHAPTER, GET_POST_STORIES } from "../constants/urls";
 import {
   IChapterPayload,
   IGenre,
@@ -23,7 +24,33 @@ export function populateTemplate(stories: any) {
         <div class="mt-2">
           ${createRatingStars(story.reviews?.avgRating)}
         </div>
-      <a href= "${window.location.pathname}/${story.id}">More Details </a>
+      <a href= "${GET_POST_STORIES}/${story.id}">About Story </a>
+      </div>
+    </div>
+    `
+    )
+    .join("");
+}
+
+export function populateLibraryTemplate(stories: any) {
+  return stories
+    .map(
+      (story: IStories) => `
+       <div class="bg-white rounded-lg shadow-md overflow-hidden" id= "story-card-${
+         story.id
+       }">
+      <img class="w-full h-48 object-cover" src="${
+        story.cover_image_url
+      }" alt="${story.title}">
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">${story.title}</h3>
+        <p class="text-gray-600">Author : ${story.username}</p>
+        <p class="text-gray-600">Genre : ${story.genres}</p>
+
+        <div class="mt-2">
+          ${createRatingStars(story.reviews?.avgRating)}
+        </div>
+      <a href= "${GET_POST_STORIES}/${story.id}${GET_CHAPTER}">Continue Reading </a>
       </div>
     </div>
     `
@@ -116,23 +143,6 @@ export const populateGenreList = async () => {
   }
 };
 
-// export function createStoryCard(story: IStories): string {
-//   return `
-//     <div class="bg-white rounded-lg shadow-md overflow-hidden">
-//       <img class="w-full h-48 object-cover" src="${
-//         story.cover_image_url
-//       }" alt="${story.title}">
-//       <div class="p-4">
-//         <h3 class="text-lg font-semibold">${story.title}</h3>
-//         <p class="text-gray-600">by ${story.user_id}</p>
-//         <div class="mt-2">
-//           ${createRatingStars(story.ratings!)}
-//         </div>
-//       </div>
-//     </div>
-//   `;
-// }
-
 export function createRatingStars(rating: number = 0): string {
   const fullStars = Math.floor(rating);
   const partialStar = rating % 1;
@@ -143,4 +153,30 @@ export function createRatingStars(rating: number = 0): string {
     ${'<span class="text-yellow-500">★</span>'.repeat(roundedFullStars)}
     ${'<span class="text-gray-400">★</span>'.repeat(emptyStars)}
   `;
+}
+
+export async function populateTemplateAndFetchHTML(
+  fetchFunction: () => Promise<any>,
+  templatePath: string,
+  containerSelector: string
+): Promise<string> {
+  try {
+    const data = await fetchFunction();
+    const htmlFile = await fetch(templatePath).then((response) =>
+      response.text()
+    );
+    const cardsHtml = populateTemplate(data);
+
+    const tempElement = document.createElement("div");
+    tempElement.innerHTML = htmlFile;
+
+    const container = tempElement.querySelector(containerSelector);
+    if (container) {
+      container.innerHTML = cardsHtml;
+    }
+
+    return tempElement.innerHTML;
+  } catch (error) {
+    return error as string;
+  }
 }

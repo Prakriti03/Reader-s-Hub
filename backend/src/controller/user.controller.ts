@@ -32,6 +32,13 @@ export async function getUsers(req: Request, res: Response) {
   res.json(data);
 }
 
+export async function getUserById(req: Request, res: Response) {
+  const {id} = req.params
+  const data = await UserService.getUserById(id);
+
+  res.json(data);
+}
+
 export async function updateUser(req: Request, res: Response) {
   const { id } = req.params;
   const { body } = req;

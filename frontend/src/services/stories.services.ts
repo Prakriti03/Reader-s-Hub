@@ -24,13 +24,15 @@ export async function addStoryWritings(storyData: FormData) {
 
 export const displayStoriesById = async (id: string) => {
   try {
-    const response = await axios.get(`${BASE_URL}${GET_POST_STORIES}/${id}`, {
+    const storyResponse = await axios.get(`${BASE_URL}${GET_POST_STORIES}/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
-    return response.data;
+
+
+    return storyResponse.data;
   } catch (error) {
     return error;
   }

@@ -4,7 +4,6 @@ import { populateStoryTemplate } from "../../utils/populateTemplates";
 export const fetchStoryData = async (storyId: string) => {
   try {
     const response = await displayStoriesById(storyId);
-    `response in fetchstorydata ${response.title}`;
 
     const htmlFile = await fetch("/src/views/readings/getStory.html").then(
       (response) => response.text()
