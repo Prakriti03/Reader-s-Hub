@@ -11,6 +11,7 @@ import { getChapter } from "../views/readings/chapters";
 import { populateGenreList } from "../utils/populateTemplates";
 import { displayProfile } from "../views/dashboards/user.dashboard";
 import { displayWritings } from "../views/writings/writingsSection";
+import { displayUserSettingsPage } from "../views/settings/user.settings";
 
 const routes = [
   {
@@ -45,6 +46,9 @@ const routes = [
   {
     path: "/home",
     action: async (context: any) => {
+      if (!isAuthenticated()) {
+        return navigateTo("/");
+      }
       const urlParams = new URLSearchParams(context.querystring);
       const page = urlParams.get("page") ? parseInt(urlParams.get("page")!) : 1;
       const response = await showStories(page);
@@ -117,6 +121,13 @@ const routes = [
     path: "/writings",
     action: async () => {
       const response = await displayWritings();
+      return response;
+    },
+  },
+  {
+    path: "/settings",
+    action: async () => {
+      const response = await displayUserSettingsPage();
       return response;
     },
   },

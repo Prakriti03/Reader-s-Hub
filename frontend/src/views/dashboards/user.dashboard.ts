@@ -11,6 +11,8 @@ export async function displayProfile() {
     ),
   ]);
 
+  console.log(`user data for dashboard : `)
+
   const tempElement = document.createElement("div");
   tempElement.innerHTML = htmlFile;
 

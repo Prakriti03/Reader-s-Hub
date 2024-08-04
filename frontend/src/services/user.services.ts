@@ -10,7 +10,36 @@ export const fetchUserData = async () => {
         "Content-Type": "application/json",
       },
     });
-    console.log(response.data)
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const changeUserData = async (formData: FormData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/users`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const deleteUserData = async () => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/users/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
     return response.data;
   } catch (error) {
     return error;

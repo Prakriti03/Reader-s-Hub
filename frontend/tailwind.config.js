@@ -9,6 +9,7 @@ export default {
     "./src/views/dashboards/admin.dashboard.html",
     "./src/views/dashboards/user.dashboard.html",
     "./src/views/home/storiesSection.html",
+    "./src/views/settings/user.settings.html",
   ],
   theme: {
     extend: {},

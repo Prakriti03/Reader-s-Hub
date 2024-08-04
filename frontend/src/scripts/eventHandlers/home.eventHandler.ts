@@ -3,6 +3,11 @@ import {
   getStoriesFromSearch,
   showStoriesByGenre,
 } from "../../views/home/storiesSection";
+import {
+  deleteUserAccount,
+  displayUserSettingsPage,
+  saveUserData,
+} from "../../views/settings/user.settings";
 import { navigateTo } from "./auth.eventhandler";
 
 export const homeEventListeners = () => {
@@ -45,4 +50,24 @@ export const homeEventListeners = () => {
   document
     .getElementById("seach-button")
     ?.addEventListener("click", getStoriesFromSearch);
+
+  document
+    .getElementById("view-settings")
+    ?.addEventListener("click", (event: Event) => {
+      event.preventDefault();
+      navigateTo("/settings");
+    });
+
+  document.querySelectorAll(".save-btn").forEach((button) => {
+    button.addEventListener("click", async (event: Event) => {
+      event.preventDefault();
+      const target = event.target as HTMLElement;
+      const setting = target.dataset.setting as string;
+      saveUserData(setting);
+    });
+  });
+
+  document
+    .getElementById("delete-account-btn")
+    ?.addEventListener("click", deleteUserAccount);
 };

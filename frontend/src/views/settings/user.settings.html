@@ -1,0 +1,101 @@
+<div class="container mx-auto p-4">
+  <div class="bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Settings</h1>
+    <form id="settings-form" class="space-y-4" enctype="multipart/form-data">
+      <div class="flex items-center">
+        <div class="flex-1">
+          <label for="username" class="block text-gray-700 font-medium"
+            >Change Username</label
+          >
+          <input
+            type="text"
+            id="username"
+            class="mt-1 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <button
+          type="button"
+          data-setting="username"
+          class="save-btn ml-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Save
+        </button>
+      </div>
+      <div>
+        <label for="email" class="block text-gray-700 font-medium">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="mt-1 p-2 w-full border rounded bg-gray-200 cursor-not-allowed"
+          disabled
+        />
+      </div>
+      <div class="flex items-center">
+        <div class="flex-1">
+          <label for="password" class="block text-gray-700 font-medium"
+            >Change Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            class="mt-1 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <button
+          type="button"
+          data-setting="password"
+          class="save-btn ml-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Save
+        </button>
+      </div>
+      <div class="flex items-center">
+        <div class="flex-1">
+          <label for="profile-picture" class="block text-gray-700 font-medium"
+            >Profile Picture</label
+          >
+          <input
+            type="file"
+            id="profile-picture"
+            class="mt-1 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div id="profile-picture-preview" class="mt-2"></div>
+        </div>
+        <button
+          type="button"
+          data-setting="profilePicture"
+          class="save-btn ml-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Save
+        </button>
+      </div>
+      <div class="flex items-center">
+        <div class="flex-1">
+          <label for="bio" class="block text-gray-700 font-medium"
+            >Change Bio</label
+          >
+          <textarea
+            id="bio"
+            class="mt-1 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+        </div>
+        <button
+          type="button"
+          data-setting="bio"
+          class="save-btn ml-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Save
+        </button>
+      </div>
+      <div class="flex justify-center items-center mt-6">
+        <button
+          type="button"
+          id="delete-account-btn"
+          class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+        >
+          Delete Account
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -14,15 +14,13 @@ export async function login(email: string, password: string) {
   }
 }
 
-export async function signup(
-  formData : FormData
-) {
+export async function signup(formData: FormData) {
   try {
-    const response = await axios.post(`${BASE_URL}/users/signup`, formData,{
-      headers:{
-        'Content-Type' : 'multipart/form-data'
-      }
-    })
+    const response = await axios.post(`${BASE_URL}/users/signup`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     return error;
