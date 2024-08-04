@@ -9,6 +9,9 @@ import { getListOfChapters } from "../views/readings/chaptersList.readings";
 import { getChapterByNumber } from "../services/chapters.services";
 import { getChapter } from "../views/readings/chapters";
 import { populateGenreList } from "../utils/populateTemplates";
+import { displayProfile } from "../views/dashboards/user.dashboard";
+import { displayWritings } from "../views/writings/writingsSection";
+import { displayUserSettingsPage } from "../views/settings/user.settings";
 
 const routes = [
   {
@@ -19,24 +22,18 @@ const routes = [
       );
     },
   },
-  {
-    path: "/home",
-    action: async () => {
-      if (!isAuthenticated()) {
-        return navigateTo("/login");
-      }
-      return await fetch("./src/views/home/home.html").then((response) =>
-        response.text()
-      );
-    },
-  },
-  {
-    path: "/login",
-    action: async () =>
-      await fetch("./src/views/login/login.html").then((response) =>
-        response.text()
-      ),
-  },
+  // {
+  //   path: "/home",
+  //   action: async () => {
+  //     if (!isAuthenticated()) {
+  //       return navigateTo("/");
+  //     }
+  //     return await fetch("./src/views/home/home.html").then((response) =>
+  //       response.text()
+  //     );
+  //   },
+  // },
+
   {
     path: "/signup",
     action: async () =>
@@ -47,9 +44,14 @@ const routes = [
 
   //for checking : combine all below to the home page
   {
-    path: "/stories",
-    action: async () => {
-      const response = await showStories();
+    path: "/home",
+    action: async (context: any) => {
+      if (!isAuthenticated()) {
+        return navigateTo("/");
+      }
+      const urlParams = new URLSearchParams(context.querystring);
+      const page = urlParams.get("page") ? parseInt(urlParams.get("page")!) : 1;
+      const response = await showStories(page);
       return response;
     },
   },
@@ -79,7 +81,6 @@ const routes = [
     },
   },
 
-
   {
     path: "/stories/:id/chapter/:number/writing-interface",
     action: async () => {
@@ -108,7 +109,28 @@ const routes = [
       return response;
     },
   },
-
+  {
+    path: "/profile",
+    action: async () => {
+      // const {id} = params;
+      const response = await displayProfile();
+      return response;
+    },
+  },
+  {
+    path: "/writings",
+    action: async () => {
+      const response = await displayWritings();
+      return response;
+    },
+  },
+  {
+    path: "/settings",
+    action: async () => {
+      const response = await displayUserSettingsPage();
+      return response;
+    },
+  },
 ];
 
 const router = new UniversalRouter(routes);

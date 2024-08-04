@@ -31,7 +31,7 @@ export class UserModel extends BaseModel {
       email: user.email,
       password: user.password,
       bio: user.bio,
-      profilePicture: user.profilePictureUrl,
+      profilePictureUrl: user.profilePictureUrl,
       updated_at: new Date().toISOString(), //convert to camel case
     };
 
@@ -65,5 +65,23 @@ export class UserModel extends BaseModel {
     const data = await query;
 
     return data;
+  }
+
+  static async getUserById(id: string) {
+    const query = this.queryBuilder()
+      .select("*")
+      .table("Users")
+      .where("id", id)
+      .first();
+
+    const data = await query;
+
+    return data;
+  }
+
+  static async getLoggedInUser(userId: string) {
+    const result = await this.getUserById(userId);
+
+    return result;
   }
 }

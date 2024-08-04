@@ -1,14 +1,15 @@
 import exp from "constants";
 import { LibraryModel } from "../models/library.model";
 import { ILibrary } from "../interfaces/library.intergace";
+import { off } from "process";
 
 export function addToLibrary(userId: string, library : ILibrary ) {
   const data = LibraryModel.addToLibrary(userId, library);
 
   return data;
 }
-export function getLibrary(userId: string) {
-  const data = LibraryModel.getLibrary(userId);
+export function getLibrary(userId: string, limit:string, offset:string) {
+  const data = LibraryModel.getLibrary(userId,limit,offset);
 
   return data;
 }

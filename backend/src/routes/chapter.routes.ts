@@ -12,10 +12,10 @@ import { upload } from "../middlewares/upload.middleware";
 
 const route = express.Router({ mergeParams: true });
 
-route.post("/:number", authentication,authorizeStoryOwner,upload.single('file'), addChapter);
-route.get("/:number", authentication, getChapterByNumber);
-route.put("/:number", authentication, authorizeStoryOwner, updateChapter);
-route.delete("/:number", authentication, authorizeStoryOwner, deleteChapter);
-route.get("/", authentication, countChaptersByStory);
+route.post("/:number", authorizeStoryOwner,upload.single('file'), addChapter);
+route.get("/:number",  getChapterByNumber);
+route.put("/:number",  authorizeStoryOwner, updateChapter);
+route.delete("/:number",  authorizeStoryOwner, deleteChapter);
+route.get("/",  countChaptersByStory);
 
 export default route;

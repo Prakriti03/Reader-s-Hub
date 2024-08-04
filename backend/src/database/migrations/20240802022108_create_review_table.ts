@@ -12,7 +12,7 @@ export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(TABLE_NAME, (table) => {
     table.bigIncrements("id");
 
-    table.string("rating", 50).notNullable();
+    table.bigint("rating").checkBetween([1, 5]);
     table.text("comment");
 
     table
@@ -22,6 +22,16 @@ export async function up(knex: Knex): Promise<void> {
       .references("id")
       .inTable("Stories")
       .onDelete("CASCADE");
+
+    table
+      .bigInteger("user_id")
+      .unsigned()
+      .notNullable()
+      .references("id")
+      .inTable("Users")
+      .onDelete("CASCADE");
+
+    table.unique(["rating", "user_id"]);
   });
 }
 

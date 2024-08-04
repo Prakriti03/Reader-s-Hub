@@ -1,5 +1,5 @@
 
-import { loadSection } from "../../utils/loadSections";
+
 
 let menuOpen = false;
 
@@ -35,12 +35,5 @@ export const dropdownItems = () => {
 
 
 
-export const addHtmlSections = async () => {
-  await loadSection(
-    "/src/views/home/storiesSection.html",
-    "talk"
-  );
-  return await fetch("/src/views/home/home.html").then((response) =>
-    response.text()
-  );
-};
+
+
