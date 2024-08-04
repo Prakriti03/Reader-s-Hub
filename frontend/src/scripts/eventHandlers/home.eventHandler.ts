@@ -1,5 +1,8 @@
 import { dropdownItems, toggleMenu } from "../../views/home/home";
-import { showStoriesByGenre } from "../../views/home/storiesSection";
+import {
+  getStoriesFromSearch,
+  showStoriesByGenre,
+} from "../../views/home/storiesSection";
 import { navigateTo } from "./auth.eventhandler";
 
 export const homeEventListeners = () => {
@@ -28,7 +31,18 @@ export const homeEventListeners = () => {
     .getElementById("user-menu-profile")
     ?.addEventListener("click", () => navigateTo("/profile"));
 
+  document.getElementById("view-writings")?.addEventListener("click", () => {
+    navigateTo("/writings");
+  });
+
   document
-    .getElementById("view-writings")
-    ?.addEventListener("click", () => navigateTo("/writings"));
+    .getElementById("logo-icon")
+    ?.addEventListener("click", (event: Event) => {
+      event.preventDefault();
+      navigateTo("/home");
+    });
+
+  document
+    .getElementById("seach-button")
+    ?.addEventListener("click", getStoriesFromSearch);
 };

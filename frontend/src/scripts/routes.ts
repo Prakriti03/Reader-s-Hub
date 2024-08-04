@@ -21,24 +21,18 @@ const routes = [
       );
     },
   },
-  {
-    path: "/home",
-    action: async () => {
-      if (!isAuthenticated()) {
-        return navigateTo("/login");
-      }
-      return await fetch("./src/views/home/home.html").then((response) =>
-        response.text()
-      );
-    },
-  },
-  {
-    path: "/login",
-    action: async () =>
-      await fetch("./src/views/login/login.html").then((response) =>
-        response.text()
-      ),
-  },
+  // {
+  //   path: "/home",
+  //   action: async () => {
+  //     if (!isAuthenticated()) {
+  //       return navigateTo("/");
+  //     }
+  //     return await fetch("./src/views/home/home.html").then((response) =>
+  //       response.text()
+  //     );
+  //   },
+  // },
+
   {
     path: "/signup",
     action: async () =>
@@ -49,7 +43,7 @@ const routes = [
 
   //for checking : combine all below to the home page
   {
-    path: "/stories",
+    path: "/home",
     action: async (context: any) => {
       const urlParams = new URLSearchParams(context.querystring);
       const page = urlParams.get("page") ? parseInt(urlParams.get("page")!) : 1;

@@ -13,6 +13,8 @@ const render = async (pathname: string) => {
   
   const content = await router.resolve(context);
 
+  console
+
   if (typeof content !== "string") {
     console.error("Content is not a string");
     return;

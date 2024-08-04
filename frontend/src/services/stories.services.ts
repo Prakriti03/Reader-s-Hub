@@ -77,14 +77,16 @@ export const filterByGenre = async (genre: string, offset: number) => {
 
 export async function fetchStories(
   endpoint: string,
-  offset: string="0",
-  limit: string="50"
+  offset: string = "0",
+  limit: string = "50",
+  searchString: string = ""
 ): Promise<any> {
   try {
     const storyResponse = await axios.get(`${BASE_URL}${endpoint}`, {
       params: {
         limit: limit,
         offset: offset,
+        searchString: searchString,
       },
       headers: {
         Authorization: `Bearer ${token}`,

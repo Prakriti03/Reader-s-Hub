@@ -8,18 +8,16 @@ import { updatePaginationControls } from "../../utils/pagination";
 import { populateTemplate } from "../../utils/populateTemplates";
 import { fetchStories } from "../../services/stories.services";
 
-
 export const showStories = async (page: number = 1) => {
-  console.log(`page right now :${page}`)
+  console.log(`page right now :${page}`);
   const offset = (page - 1) * parseInt(LIMIT);
-  console.log(`offset : ${offset}`)
+  console.log(`offset : ${offset}`);
   try {
     const [data, genres, storiesCount] = await Promise.all([
-      fetchStories(GET_POST_STORIES,offset),
+      fetchStories(GET_POST_STORIES),
       getGenres(),
       countStories(),
     ]);
-
 
     const htmlFile = await fetch("/src/views/home/storiesSection.html").then(
       (response) => response.text()
@@ -47,7 +45,6 @@ export const showStories = async (page: number = 1) => {
       container.innerHTML = storyCardsHtml;
     }
 
-
     updatePaginationControls(storiesCount, page, showStories);
 
     return tempElement.innerHTML;
@@ -57,7 +54,7 @@ export const showStories = async (page: number = 1) => {
 };
 
 //too many repeated codes refactor here!
-export const showStoriesByGenre = async (page:number=1) => {
+export const showStoriesByGenre = async (page: number = 1) => {
   // event.preventDefault();
   const genreSelect = document.getElementById(
     "genre-filter"
@@ -85,5 +82,32 @@ export const showStoriesByGenre = async (page:number=1) => {
     );
   } catch (error) {
     console.error("Error fetching filtered stories:", error);
+  }
+};
+
+export const getStoriesFromSearch = async (event: Event) => {
+  event.preventDefault();
+  try {
+    console.log("inside getStoriesFromSearch");
+
+    const storyToSearch = (
+      document.getElementById("default-search") as HTMLInputElement
+    ).value;
+
+    const data = await fetchStories("/search", "0","50",storyToSearch);
+
+    console.log(`data from backend : ${data}`)
+    const searchedStoryCardHtml = populateTemplate(data);
+
+    const container = document.getElementById("story-cards-container");
+    if (container) {
+      container.innerHTML = searchedStoryCardHtml;
+    }
+
+    // updatePaginationControls(response.totalStories, page, (page) =>
+    //   showStoriesByGenre(page)
+    // );
+  } catch (error) {
+    console.log(error);
   }
 };
