@@ -134,3 +134,18 @@ export const countStories = async () => {
     return error;
   }
 };
+
+export const updateStory=async(formData:FormData,storyId:string)=>{
+  try {
+    const response = await axios.put(`${BASE_URL}/stories/${storyId}`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+}

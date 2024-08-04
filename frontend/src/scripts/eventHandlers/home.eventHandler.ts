@@ -8,6 +8,7 @@ import {
   displayUserSettingsPage,
   saveUserData,
 } from "../../views/settings/user.settings";
+import { saveStoryData } from "../../views/writings/updateStory";
 import { navigateTo } from "./auth.eventhandler";
 
 export const homeEventListeners = () => {
@@ -67,7 +68,28 @@ export const homeEventListeners = () => {
     });
   });
 
+  document.querySelectorAll(".save-story-btn").forEach((button) => {
+    button.addEventListener("click", async (event: Event) => {
+      event.preventDefault();
+      const target = event.target as HTMLElement;
+      const setting = target.dataset.setting as string;
+      const storyId = ((window.location.pathname).split('/'))[2];
+      saveStoryData(setting,storyId);
+    });
+  });
   document
     .getElementById("delete-account-btn")
     ?.addEventListener("click", deleteUserAccount);
+
+  document
+    .getElementById("edit-chapters-button")
+    ?.addEventListener("click", () => {
+      navigateTo(`${window.location.pathname}/chapter`);
+    });
+
+  document
+    .getElementById("edit-story-button")
+    ?.addEventListener("click", () =>
+      navigateTo(`${window.location.pathname}/edit`)
+    );
 };

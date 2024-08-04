@@ -5,20 +5,19 @@ import { token } from "../utils/authHelpers";
 import { INITIAL_OFFSET, LIMIT } from "../constants/writings";
 import { ILibrary } from "../interfaces/story.interfaces";
 
-export const displayLibrary = async () => {
-  try {
-    const token = getToken();
+// export const displayLibrary = async () => {
+//   try {
 
-    const response = await axios.get(`${BASE_URL}${GET_LIBRARY}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    return error;
-  }
-};
+//     const response = await axios.get(`${BASE_URL}${GET_LIBRARY}`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     return response.data;
+//   } catch (error) {
+//     return error;
+//   }
+// };
 
 export const addToLibrary = async (libraryData:ILibrary) => {
   try {
@@ -37,3 +36,4 @@ export const addToLibrary = async (libraryData:ILibrary) => {
     return error;
   }
 };
+

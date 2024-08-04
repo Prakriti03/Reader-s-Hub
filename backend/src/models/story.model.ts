@@ -69,7 +69,7 @@ export class StoryModel extends BaseModel {
     const query = this.queryBuilder()
       .select(
         "Stories.*",
-        "Users.username",
+        "Users.username","Users.id as user_id",
         this.queryBuilder().raw('array_agg("Genres".genre) as genres')
       )
       .from("Stories")
@@ -77,10 +77,10 @@ export class StoryModel extends BaseModel {
       .leftJoin("Story-Genre", "Stories.id", "Story-Genre.stories_id")
       .leftJoin("Genres", "Story-Genre.genre_id", "Genres.id")
       .where("Stories.user_id", userId)
-      .groupBy("Stories.id", "Users.username")
+      .groupBy("Stories.id", "Users.username","Users.id")
       .limit(parseInt(limit))
       .offset(parseInt(offset))
-      .returning("*");
+     
     const data = await query;
 
     return data;

@@ -10,7 +10,7 @@ export const fetchStoryData = async (storyId: string) => {
       (response) => response.text()
     );
 
-    const htmlString = populateStoryTemplate(htmlFile, response);
+    const htmlString = await populateStoryTemplate(htmlFile, response,true);   //true/false needs to change
     const tempElement = document.createElement("div");
 
     tempElement.innerHTML = htmlString;
@@ -36,4 +36,6 @@ export async function addReview(){
 
 
 }
+
+
 

@@ -12,6 +12,7 @@ import { populateGenreList } from "../utils/populateTemplates";
 import { displayProfile } from "../views/dashboards/user.dashboard";
 import { displayWritings } from "../views/writings/writingsSection";
 import { displayUserSettingsPage } from "../views/settings/user.settings";
+import { displayEditStoryPage } from "../views/writings/updateStory";
 
 const routes = [
   {
@@ -131,6 +132,14 @@ const routes = [
       return response;
     },
   },
+  {
+    path : "/stories/:id/edit",
+    action: async ({ params }: { params: IParams }) => {
+      const { id } = params;
+      const response = await displayEditStoryPage(id!);
+      return response;
+    },
+  }
 ];
 
 const router = new UniversalRouter(routes);

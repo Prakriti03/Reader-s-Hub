@@ -23,7 +23,7 @@ export const showStories = async (page: number = 1) => {
       (response) => response.text()
     );
 
-    const storyCardsHtml = populateTemplate(data);
+    const storyCardsHtml = populateTemplate(data,"About Story");
 
     const tempElement = document.createElement("div");
 
@@ -70,7 +70,7 @@ export const showStoriesByGenre = async (page: number = 1) => {
   try {
     const response = await filterByGenre(selectedGenre, offset);
 
-    const filteredStoryCardsHtml = populateTemplate(response);
+    const filteredStoryCardsHtml = populateTemplate(response, "About Story");
 
     const container = document.getElementById("story-cards-container");
     if (container) {
@@ -97,7 +97,7 @@ export const getStoriesFromSearch = async (event: Event) => {
     const data = await fetchStories("/search", "0","50",storyToSearch);
 
     console.log(`data from backend : ${data}`)
-    const searchedStoryCardHtml = populateTemplate(data);
+    const searchedStoryCardHtml = populateTemplate(data, "About Story");
 
     const container = document.getElementById("story-cards-container");
     if (container) {

@@ -2,7 +2,7 @@ export interface IStories {
   id?: string;
   title: string;
   description: string;
-  user_id?: string;
+  user_id: string;
   cover_image_url: string;
   genres: string[];
   reviews: IReview;
@@ -32,12 +32,11 @@ export interface IGenreStory {
 export interface IReview {
   avgRating: number;
   comments: IComments[];
-  
 }
 
-export interface IComments{
-  comment : string,
-  userProfilePicture : string | null;
+export interface IComments {
+  comment: string;
+  userProfilePicture: string | null;
 }
 
 export interface ILibrary {
@@ -45,7 +44,7 @@ export interface ILibrary {
   storyId: string;
 }
 
-export interface Review{
-  comment ?: string,
-  rating ?: number
+export interface Review {
+  comment?: string;
+  rating?: number;
 }

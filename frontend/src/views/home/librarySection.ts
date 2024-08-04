@@ -1,27 +1,32 @@
-import { displayLibrary } from "../../services/library.services";
 import {
-  populateLibraryTemplate,
+  
   populateTemplate,
 } from "../../utils/populateTemplates";
 import { addToLibrary } from "../../services/library.services";
 import { fetchStories } from "../../services/stories.services";
 import { LIMIT } from "../../constants/writings";
+import { IStories } from "../../interfaces/story.interfaces";
 
-export const showLibrary = async (limit:string, offset:string) => {
+export const showLibrary = async (limit: string, offset: string) => {
   //  offset = (page - 1) * parseInt(LIMIT);
 
   try {
     // const data = await displayLibrary();
     const [data, htmlFile] = await Promise.all([
-      fetchStories("/library", offset,limit),
+      fetchStories("/library", offset, limit),
       fetch("/src/views/home/librarySection.html").then((response) =>
         response.text()
       ),
     ]);
 
-    console.log(`stories from data : ${data}`);
+    console.log(`stories from library : ${data}`);
+  
+    data.forEach((story: IStories) => {
+      console.log(`Story ID: ${story.id}`);
+      // Perform any additional operations with story.id if needed
+    });
 
-    const libraryCardsHtml = populateLibraryTemplate(data);
+    const libraryCardsHtml = populateTemplate(data, "Continue Reading");
 
     const tempElement = document.createElement("div");
 

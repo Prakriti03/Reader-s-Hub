@@ -1,6 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../constants/urls";
 import { token } from "../utils/authHelpers";
+import { saveToken } from "../utils/token";
 
 export const fetchUserData = async () => {
   try {
