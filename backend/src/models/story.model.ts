@@ -59,6 +59,33 @@ export class StoryModel extends BaseModel {
     return data;
   }
 
+  static async getStoriesByUserId(
+    userId: string,
+    limit: string,
+    offset: string
+  ) {
+
+    console.log(`for wriitng : limit : ${limit}, offset: ${offset}`)
+    const query = this.queryBuilder()
+      .select(
+        "Stories.*",
+        "Users.username",
+        this.queryBuilder().raw('array_agg("Genres".genre) as genres')
+      )
+      .from("Stories")
+      .leftJoin("Users", "Stories.user_id", "Users.id")
+      .leftJoin("Story-Genre", "Stories.id", "Story-Genre.stories_id")
+      .leftJoin("Genres", "Story-Genre.genre_id", "Genres.id")
+      .where("Stories.user_id", userId)
+      .groupBy("Stories.id", "Users.username")
+      .limit(parseInt(limit))
+      .offset(parseInt(offset))
+      .returning("*");
+    const data = await query;
+
+    return data;
+  }
+
   static async getStoriesByGenre(
     limit: number,
     offset: number,

@@ -52,6 +52,8 @@ export const readingsEventListeners = () => {
     .getElementById("add-comment-button")
     ?.addEventListener("click", addReview);
 
+  document.getElementById("view-all-readings-button")?.addEventListener("click", ()=>navigateTo("/library"))
+
   document.getElementById("rating-stars")?.addEventListener("click", () => {
     const ratingStars = document.querySelectorAll("#rating-stars span");
     let currentRating = 0;

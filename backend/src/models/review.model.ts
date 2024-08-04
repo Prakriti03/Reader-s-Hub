@@ -37,11 +37,9 @@ export class ReviewModel extends BaseModel {
       commentsQuery,
     ]);
 
-    console.log(avgRatingResult[0]);
 
     const avgRating = avgRatingResult[0].avgrating;
 
-    console.log(`average rating : ${avgRating}`);
 
     // Extract comments
     const comments = commentsResult.map((row) => ({

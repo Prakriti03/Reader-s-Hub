@@ -4,6 +4,7 @@ import {
   createStory,
   deleteStory,
   getStories,
+  getStoriesByUserId,
   getStoryById,
   getTotalStoriesCount,
   updateStory,
@@ -17,7 +18,8 @@ const route = express();
 
 route.post("/", authentication,upload.single("coverImage"), createStory);
 route.get("/count", authentication, getTotalStoriesCount);
-route.get("/genre-count",authentication, getTotalStoriesCountByGenre)
+route.get("/genre-count",authentication, getTotalStoriesCountByGenre);
+route.get("/author",authentication,getStoriesByUserId);
 route.get("/:id", authentication, getStoryById);
 route.get("/",authentication, getStories);
 route.put("/:id", authentication, updateStory);

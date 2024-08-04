@@ -9,6 +9,8 @@ import { getListOfChapters } from "../views/readings/chaptersList.readings";
 import { getChapterByNumber } from "../services/chapters.services";
 import { getChapter } from "../views/readings/chapters";
 import { populateGenreList } from "../utils/populateTemplates";
+import { displayProfile } from "../views/dashboards/user.dashboard";
+import { displayWritings } from "../views/writings/writingsSection";
 
 const routes = [
   {
@@ -81,7 +83,6 @@ const routes = [
     },
   },
 
-
   {
     path: "/stories/:id/chapter/:number/writing-interface",
     action: async () => {
@@ -110,7 +111,21 @@ const routes = [
       return response;
     },
   },
-
+  {
+    path: "/profile",
+    action: async () => {
+      // const {id} = params;
+      const response = await displayProfile();
+      return response;
+    },
+  },
+  {
+    path: "/writings",
+    action: async () => {
+      const response = await displayWritings();
+      return response;
+    },
+  },
 ];
 
 const router = new UniversalRouter(routes);

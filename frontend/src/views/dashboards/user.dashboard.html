@@ -1,4 +1,3 @@
-<script type="module" src="./home.ts"></script>
 <nav class="bg-white">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-28 items-center justify-between">
@@ -14,10 +13,10 @@
           <span class="absolute -inset-0.5"></span>
           <span class="sr-only">Open main menu</span>
           <!--
-              Icon when menu is closed.
-  
-              Menu open: "hidden", Menu closed: "block"
-            -->
+                Icon when menu is closed.
+    
+                Menu open: "hidden", Menu closed: "block"
+              -->
           <svg
             id="open-icon"
             class="block h-6 w-6"
@@ -34,10 +33,10 @@
             />
           </svg>
           <!--
-              Icon when menu is open.
-  
-              Menu open: "block", Menu closed: "hidden"
-            -->
+                Icon when menu is open.
+    
+                Menu open: "block", Menu closed: "hidden"
+              -->
           <!-- Icon when menu is open -->
           <svg
             id="close-icon"
@@ -67,7 +66,8 @@
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a
-              href="" id="browse-stories-button"
+              href=""
+              id="browse-stories-button"
               class="rounded-md bg-gray-900 px-6 py-2 text-sm font-medium text-white"
               aria-current="page"
               >Browse Stories</a
@@ -122,8 +122,8 @@
       >
         <button
           type="button"
-          class="rounded-md bg-gray-900 px-6 py-2 text-sm font-medium text-white" id = "start-writing-button"
-          
+          class="rounded-md bg-gray-900 px-6 py-2 text-sm font-medium text-white"
+          id="start-writing-button"
         >
           Start Writing
         </button>
@@ -149,15 +149,15 @@
           </div>
 
           <!--
-              Dropdown menu, show/hide based on menu state.
-  
-              Entering: "transition ease-out duration-100"
-                From: "transform opacity-0 scale-95"
-                To: "transform opacity-100 scale-100"
-              Leaving: "transition ease-in duration-75"
-                From: "transform opacity-100 scale-100"
-                To: "transform opacity-0 scale-95"
-            -->
+                Dropdown menu, show/hide based on menu state.
+    
+                Entering: "transition ease-out duration-100"
+                  From: "transform opacity-0 scale-95"
+                  To: "transform opacity-100 scale-100"
+                Leaving: "transition ease-in duration-75"
+                  From: "transform opacity-100 scale-100"
+                  To: "transform opacity-0 scale-95"
+              -->
           <div
             id="dropdown-menu"
             class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
@@ -175,13 +175,13 @@
               >Your Profile</a
             >
             <a
-            href=""
-            class="block px-4 py-2 text-sm text-gray-700"
-            role="menuitem"
-            tabindex="-1"
-            id="view-library"
-            >Library</a
-          >
+              href=""
+              class="block px-4 py-2 text-sm text-gray-700"
+              role="menuitem"
+              tabindex="-1"
+              id="view-library"
+              >Library</a
+            >
             <a
               href=""
               class="block px-4 py-2 text-sm text-gray-700"
@@ -237,102 +237,89 @@
   </div>
 </nav>
 
-<!-- Image Carousel -->
-
-<div class="relative w-full max-w-6xl mx-auto mt-8">
-  <div class="carousel overflow-hidden relative">
-    <div class="carousel-inner relative w-full overflow-hidden">
-      <div class="carousel-item active float-left w-full">
-        <img
-          src="https://plus.unsplash.com/premium_photo-1721446379149-d8aef573bae9?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          class="block w-full"
-          alt="First Slide"
-        />
-      </div>
-      <div class="carousel-item float-left w-full">
-        <img
-          src="https://images.unsplash.com/photo-1721905126607-6700881aaa95?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          class="block w-full"
-          alt="Second Slide"
-        />
-      </div>
-      <div class="carousel-item float-left w-full">
-        <img
-          src="https://images.unsplash.com/photo-1721613884660-14099d377f02?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          class="block w-full"
-          alt="Third Slide"
-        />
+<div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
+    <div class="profile-header">
+      <img src="" alt="Profile Picture" class="profile-picture" id="profile-picture" />
+      <div class="profile-details">
+        <h2 class="text-3xl font-bold" id="username">Username</h2>
+        <p class="text-lg" id="user-bio">This is the user bio. It can be a few lines long and describe the user.</p>
       </div>
     </div>
-    <button
-      class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 left-0"
-      type="button"
-      data-bs-target="#carouselExample"
-      data-bs-slide="prev"
-    >
-      <span
-        class="carousel-control-prev-icon inline-block bg-no-repeat"
-        aria-hidden="true"
-      ></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button
-      class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 right-0"
-      type="button"
-      data-bs-target="#carouselExample"
-      data-bs-slide="next"
-    >
-      <span
-        class="carousel-control-next-icon inline-block bg-no-repeat"
-        aria-hidden="true"
-      ></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+    <div class="p-6">
+      <!-- Your Writings Section -->
+      <div class="mb-8">
+        <div class="section-header">
+          <h3 class="text-2xl font-bold text-orange-700 section-title">Writings</h3>
+          <button class="view-all-writings-button" id="view-writings">View All ></button>
+        </div>
+        <div class="space-y-4" id="writings-list"></div>
+      </div>
+      <!-- Your Reading List Section -->
+      <div class="mb-8">
+        <div class="section-header">
+          <h3 class="text-2xl font-bold text-orange-700 section-title">Reading List</h3>
+          <button class="view-all" id="view-all-readings-button">View All ></button>
+        </div>
+        <div class="space-y-4" id="readings-list"></div>
+      </div>
+    </div>
   </div>
-</div>
 
-<!-- Welcome Message -->
-<div class="text-center mt-8">
-  <h1 class="text-4xl font-bold">Welcome!</h1>
-</div>
-
-<!-- Continue Reading Section -->
-<div id="continue-reading-section"></div>
-
-<section class="mt-12 px-8">
-  <h2 class="text-2xl font-semibold mb-4">Your Reading List</h2>
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-  >
-    <!-- Example story cards -->
-    <div class="bg-white p-4 rounded-lg shadow-md">
-      <h3 class="text-lg font-semibold">{{title}}</h3>
-      <p class="text-gray-600">{{description}}</p>
-    </div>
-    <div class="bg-white p-4 rounded-lg shadow-md">
-      <h3 class="text-lg font-semibold">Story Title 2</h3>
-      <p class="text-gray-600">Brief description of the story.</p>
-    </div>
-    <!-- Add more stories as needed -->
-  </div>
-</section>
-
-<!-- Explore Genres Section -->
-<section class="mt-12 px-8">
-  <h2 class="text-2xl font-semibold mb-4">Explore Genres</h2>
-  <div
-    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
-  >
-    <!-- Example genre cards -->
-    <div class="bg-white p-4 rounded-lg shadow-md text-center">
-      <h3 class="text-lg font-semibold">Genre 1</h3>
-    </div>
-    <div class="bg-white p-4 rounded-lg shadow-md text-center">
-      <h3 class="text-lg font-semibold">Genre 2</h3>
-    </div>
-    <!-- Add more genres as needed -->
-  </div>
-</section>
-
-<!-- Talk of Town Section -->
-<div id="talk"></div>
+<style>
+  .profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .section-title {
+    border-bottom: 3px solid #f97316; /* Orange */
+    padding-bottom: 0.5rem;
+  }
+  .view-button,
+  .view-all-button {
+    background-color: #f97316; /* Orange */
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s;
+  }
+  .view-button:hover,
+  .view-all-button:hover {
+    background-color: #ea580c; /* Darker Orange */
+  }
+  .card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+  }
+  .profile-header {
+    background-color: #f97316; /* Orange */
+    padding: 2rem;
+    color: white;
+    border-radius: 0.5rem 0.5rem 0 0;
+    display: flex;
+    align-items: center;
+  }
+  .profile-details {
+    margin-left: 1rem;
+  }
+  .cover-image {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 0.25rem;
+    margin-right: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+</style>

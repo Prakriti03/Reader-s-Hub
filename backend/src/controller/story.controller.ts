@@ -2,6 +2,7 @@ import {  Response } from "express";
 import { Request } from "../interfaces/auth.interface";
 import * as StoryService from "../services/story.services";
 import { cloudinary } from "../config/cloudinary.config";
+import { off } from "process";
 
 export async function createStory(req: Request, res: Response) {
     const { body } = req;
@@ -31,6 +32,14 @@ export async function getStories(req:Request,res:Response) {
   res.json(data);
 }
 
+export async function getStoriesByUserId(req:Request,res:Response) {
+  const userId = req.user?.id;
+  const {limit, offset} = req.query;
+
+  const data = await StoryService.getStoriesByUserId(userId!,limit as string,offset as string);
+
+  res.json(data)
+}
 export async function getStoryById(req: Request, res: Response) {
     const { id } = req.params;
 

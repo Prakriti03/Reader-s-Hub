@@ -1,4 +1,5 @@
-import { Request, Response } from "express";
+import {  Response } from "express";
+import { Request } from "../interfaces/auth.interface";
 import * as UserService from "../services/user.services";
 import {cloudinary} from "../config/cloudinary.config"
  
@@ -37,6 +38,14 @@ export async function getUserById(req: Request, res: Response) {
   const data = await UserService.getUserById(id);
 
   res.json(data);
+}
+
+export async function getLoggedInUser(req:Request, res: Response) {
+  const userId= req.user?.id!;
+
+  const data = await UserService.getLoggedInUser(userId);
+
+  res.json(data)
 }
 
 export async function updateUser(req: Request, res: Response) {

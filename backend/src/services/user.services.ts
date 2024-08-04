@@ -12,8 +12,8 @@ export async function createUser(user: IUser) {
   return data;
 }
 
-export  function getUsers() {
-  const data =  UserModel.getUsers();
+export function getUsers() {
+  const data = UserModel.getUsers();
 
   return data;
 }
@@ -23,8 +23,14 @@ export function getUserByEmail(email: string) {
   return data;
 }
 
-export function getUserById(id : string){
+export function getUserById(id: string) {
   const data = UserModel.getUserById(id);
+  return data;
+}
+
+export function getLoggedInUser(userId: string) {
+  const data = UserModel.getLoggedInUser(userId);
+
   return data;
 }
 

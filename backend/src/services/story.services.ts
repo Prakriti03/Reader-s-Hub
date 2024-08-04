@@ -1,3 +1,4 @@
+import { off } from "process";
 import { IStories } from "../interfaces/story.interface";
 import { StoryModel } from "../models/story.model";
 
@@ -26,6 +27,13 @@ export const getStories = async (
     return data;
   }
 };
+
+export function getStoriesByUserId(userId: string,limit:string,offset:string) {
+  const data = StoryModel.getStoriesByUserId(userId,limit,offset);
+
+  return data;
+}
+
 export function updateStory(
   id: string,
   storyToUpdate: IStories,
@@ -45,9 +53,8 @@ export function getTotalStoriesCount() {
 
   return data;
 }
-export function getTotalStoriesCountByGenre(genre:string) {
+export function getTotalStoriesCountByGenre(genre: string) {
   const data = StoryModel.getTotalStoriesCountByGenre(genre);
 
   return data;
 }
-

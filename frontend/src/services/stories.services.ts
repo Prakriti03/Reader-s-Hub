@@ -45,7 +45,7 @@ export const displayStoriesById = async (id: string) => {
 
     const reviews = reviewResponse.data;
 
-    console.log(reviews)
+    console.log(reviews);
 
     return {
       ...story,
@@ -77,17 +77,18 @@ export const filterByGenre = async (genre: string, offset: number) => {
 
 export async function fetchStories(
   endpoint: string,
-  offset: number
+  offset: string="0",
+  limit: string="50"
 ): Promise<any> {
   try {
     const storyResponse = await axios.get(`${BASE_URL}${endpoint}`, {
+      params: {
+        limit: limit,
+        offset: offset,
+      },
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
-      },
-      params: {
-        limit: LIMIT,
-        offset: offset,
       },
     });
 

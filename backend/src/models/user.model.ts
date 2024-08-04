@@ -68,10 +68,16 @@ export class UserModel extends BaseModel {
   }
 
   static async getUserById(id: string) {
-    const query = this.queryBuilder().table("Users").where("id", id).first();
+    const query = this.queryBuilder().select("*").table("Users").where("id", id).first();
 
     const data = await query;
 
     return data;
+  }
+
+  static async getLoggedInUser(userId: string) {
+    const result = await this.getUserById(userId);
+
+    return result;
   }
 }
