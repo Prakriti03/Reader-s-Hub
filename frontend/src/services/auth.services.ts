@@ -22,7 +22,7 @@ export async function signup(formData: FormData) {
       },
     });
     return response.data;
-  } catch (error) {
-    return error;
+  } catch (error: any) {
+    return error.response.data.error;
   }
 }

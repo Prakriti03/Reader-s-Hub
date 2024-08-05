@@ -73,8 +73,8 @@ export const homeEventListeners = () => {
       event.preventDefault();
       const target = event.target as HTMLElement;
       const setting = target.dataset.setting as string;
-      const storyId = ((window.location.pathname).split('/'))[2];
-      saveStoryData(setting,storyId);
+      const storyId = window.location.pathname.split("/")[2];
+      saveStoryData(setting, storyId);
     });
   });
   document
@@ -92,4 +92,12 @@ export const homeEventListeners = () => {
     ?.addEventListener("click", () =>
       navigateTo(`${window.location.pathname}/edit`)
     );
+
+  document
+    .getElementById("user-menu-signout")
+    ?.addEventListener("click", (event: Event) => {
+      event.preventDefault();
+      localStorage.removeItem("token");
+      window.location.href = "/";
+    });
 };

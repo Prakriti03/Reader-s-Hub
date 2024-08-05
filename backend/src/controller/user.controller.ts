@@ -22,6 +22,7 @@ export async function createUser(req: Request, res: Response) {
     }
     res.json(body);
   } catch (error) {
+    console.log("here");
     res.json(error);
   }
 }

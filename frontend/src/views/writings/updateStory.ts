@@ -2,7 +2,7 @@ import { displayStoriesById, updateStory } from "../../services/stories.services
 import { fetchStoryData } from "../readings/getStory";
 
 export const displayEditStoryPage = async (storyId: string) => {
-    const [storyData, htmlFile] = await Promise.all([
+     const [storyData, htmlFile] = await Promise.all([
       displayStoriesById(storyId),
       fetch("/src/views/writings/updateStory.html").then((response) => response.text()),
     ]);
@@ -44,7 +44,7 @@ export async function saveStoryData(setting: string, storyId: string) {
     formData.append("description", description);
   } else if (setting === "coverImage") {
     const coverImage = (document.getElementById("cover-image") as HTMLInputElement).files![0];
-    if (coverImage) formData.append("cover_image_url", coverImage);
+    if (coverImage) formData.append("coverImage", coverImage);
   }
 
   console.log(formData)

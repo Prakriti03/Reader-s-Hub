@@ -64,7 +64,7 @@ export async function updateStory(req: Request, res: Response) {
       const result = await cloudinary.uploader.upload(coverImage.path, {
         folder: "story-coverImages",
       });
-      storyData.cover_image_url = result.secure_url;
+      storyData.coverImageUrl= result.secure_url;
     }
 
     const data = await StoryService.updateStory(id, storyData, userId!);
