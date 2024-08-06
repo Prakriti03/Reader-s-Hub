@@ -5,13 +5,13 @@ import router from "./routes";
 
 const render = async (pathname: string) => {
 
-  const url = new URL(pathname, window.location.origin);
-  const context = {
-    pathname: url.pathname,
-    querystring: url.search,
-  };
+  // const url = new URL(pathname, window.location.origin);
+  // const context = {
+  //   pathname: url.pathname,
+  //   querystring: url.search,
+  // };
   
-  const content = await router.resolve(context);
+  const content = await router.resolve({pathname});
 
   console
 

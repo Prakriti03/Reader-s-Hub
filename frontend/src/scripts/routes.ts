@@ -1,17 +1,15 @@
 import UniversalRouter from "universal-router";
-import { isAuthenticated } from "../utils/token";
-import { navigateTo } from "./eventHandlers/auth.eventhandler";
 import { showStories } from "../views/home/storiesSection";
 import { showLibrary } from "../views/home/librarySection";
 import { fetchStoryData } from "../views/readings/getStory";
 import { IParams } from "../interfaces/story.interfaces";
 import { getListOfChapters } from "../views/readings/chaptersList.readings";
-import { getChapterByNumber } from "../services/chapters.services";
 import { getChapter } from "../views/readings/chapters";
 import { populateGenreList } from "../utils/populateTemplates";
 import { displayProfile } from "../views/dashboards/user.dashboard";
 import { displayWritings } from "../views/writings/writingsSection";
 import { displayUserSettingsPage } from "../views/settings/user.settings";
+import { displayEditStoryPage } from "../views/writings/updateStory";
 
 const routes = [
   {
@@ -22,17 +20,6 @@ const routes = [
       );
     },
   },
-  // {
-  //   path: "/home",
-  //   action: async () => {
-  //     if (!isAuthenticated()) {
-  //       return navigateTo("/");
-  //     }
-  //     return await fetch("./src/views/home/home.html").then((response) =>
-  //       response.text()
-  //     );
-  //   },
-  // },
 
   {
     path: "/signup",
@@ -45,13 +32,8 @@ const routes = [
   //for checking : combine all below to the home page
   {
     path: "/home",
-    action: async (context: any) => {
-      if (!isAuthenticated()) {
-        return navigateTo("/");
-      }
-      const urlParams = new URLSearchParams(context.querystring);
-      const page = urlParams.get("page") ? parseInt(urlParams.get("page")!) : 1;
-      const response = await showStories(page);
+    action: async () => {
+      const response = await showStories();
       return response;
     },
   },
@@ -128,6 +110,14 @@ const routes = [
     path: "/settings",
     action: async () => {
       const response = await displayUserSettingsPage();
+      return response;
+    },
+  },
+  {
+    path: "/stories/:id/edit",
+    action: async ({ params }: { params: IParams }) => {
+      const { id } = params;
+      const response = await displayEditStoryPage(id!);
       return response;
     },
   },

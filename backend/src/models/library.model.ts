@@ -46,4 +46,17 @@ export class LibraryModel extends BaseModel {
       stories_id: storyId,
     });
   }
+
+  static async checkStoryInLibrary(userId: string, storyId: string) {
+    const query = this.queryBuilder().select(
+      this.queryBuilder().raw(
+        "EXISTS(SELECT 1 FROM Library WHERE user_id = ? AND story_id = ?) AS is_in_library",
+        [userId, storyId]
+      )
+    );
+
+    const result = await query;
+
+    return result[0].is_in_library;
+  }
 }

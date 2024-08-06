@@ -54,33 +54,4 @@ export const readingsEventListeners = () => {
 
   document.getElementById("view-all-readings-button")?.addEventListener("click", ()=>navigateTo("/library"))
 
-  document.getElementById("rating-stars")?.addEventListener("click", () => {
-    const ratingStars = document.querySelectorAll("#rating-stars span");
-    let currentRating = 0;
-
-    ratingStars.forEach((star) => {
-      star.addEventListener("mouseover", () => {
-        const rating = parseInt(star.getAttribute("data-rating")!);
-        updateStars(ratingStars, rating);
-      });
-
-      star.addEventListener("mouseout", () => {
-        updateStars(ratingStars, currentRating);
-      });
-
-      star.addEventListener("click", () => {
-        currentRating = parseInt(star.getAttribute("data-rating")!);
-        updateStars(ratingStars, currentRating);
-        // Call a function to submit the rating to the server if needed
-        // submitRating(currentRating);
-      });
-    });
-    function updateStars(ratingStars, rating) {
-      ratingStars.forEach((star) => {
-        const starRating = parseInt(star.getAttribute("data-rating"));
-        star.classList.toggle("text-yellow-500", starRating <= rating);
-        star.classList.toggle("text-gray-400", starRating > rating);
-      });
-    }
-  });
 };

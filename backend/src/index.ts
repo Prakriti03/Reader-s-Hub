@@ -4,6 +4,7 @@ import config from "./config/config";
 import cors from "cors";
 import path from "path";
 import bodyParser from "body-parser";
+import { errorHandler } from "./middlewares/errorHandler.middleware";
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use(route);
 app.get("/", (req, res) => {
   res.send("Hello to Reader's Hub");
 });
+
+app.use(errorHandler);
 
 app.listen(config.port, () => {
   console.log(`Server started listening on port :${config.port}`);

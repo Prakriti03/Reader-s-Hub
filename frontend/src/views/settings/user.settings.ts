@@ -1,4 +1,3 @@
-import { signup } from "../../services/auth.services";
 import {
   changeUserData,
   deleteUserData,
@@ -67,10 +66,9 @@ export async function saveUserData(setting: string) {
   console.log(formData);
   try {
     const response = await changeUserData(formData);
-    console.log(`response from backend is : ${response}`);
-    alert(JSON.stringify(response));
+    alert(response)
   } catch (error) {
-    return error;
+    alert(JSON.stringify(error));
   }
   //   finally {
   //     setLoading(false); // Set loading state to false

@@ -1,0 +1,67 @@
+<div class="container mx-auto p-4">
+  <div class="bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">
+      Edit Story
+    </h1>
+    <form id="edit-story-form" class="space-y-4" enctype="multipart/form-data">
+      <div class="flex items-center space-x-4">
+        <div class="flex-1">
+          <label for="story-title" class="block text-gray-700 font-medium"
+            >Change Title</label
+          >
+          <input
+            type="text" 
+            id="story-title"
+            class="mt-1 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <button
+          type="button"
+          data-setting="title"
+          class="save-story-btn bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Save
+        </button>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="flex-1">
+          <label for="story-description" class="block text-gray-700 font-medium"
+            >Description</label
+          >
+          <textarea
+            id="story-description"
+            class="mt-1 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+        </div>
+        <button
+          type="button"
+          data-setting="description"
+          class="save-story-btn bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Save
+        </button>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="flex-1">
+          <label for="cover-image" class="block text-gray-700 font-medium"
+            >Change Cover Image</label
+          >
+          <input
+            type="file"
+            id="cover-image"
+            class="mt-1 p-2 w-full border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            accept="image/*"
+          />
+          <div id="cover-image-preview" class="mt-2"></div>
+        </div>
+        <button
+          type="button"
+          data-setting="coverImage"
+          class="save-story-btn bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

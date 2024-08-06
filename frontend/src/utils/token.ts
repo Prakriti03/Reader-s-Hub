@@ -9,9 +9,12 @@ export function getToken() {
 export function isAuthenticated() {
   let token = undefined;
   token = getToken();
-  if (token == undefined || token==null) {  //or expired
+  if (token == undefined || token == null) {
+    //or expired
     return false;
   } else {
     return true;
   }
 }
+
+

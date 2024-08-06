@@ -1,19 +1,14 @@
 import { GET_POST_STORIES } from "../../constants/urls";
-import { LIMIT } from "../../constants/writings";
 import { IGenre } from "../../interfaces/story.interfaces";
 import { getGenres } from "../../services/genres.services";
 import { countStories } from "../../services/stories.services";
 import { filterByGenre } from "../../services/stories.services";
-import { updatePaginationControls } from "../../utils/pagination";
 import { populateTemplate } from "../../utils/populateTemplates";
 import { fetchStories } from "../../services/stories.services";
 
-export const showStories = async (page: number = 1) => {
-  console.log(`page right now :${page}`);
-  const offset = (page - 1) * parseInt(LIMIT);
-  console.log(`offset : ${offset}`);
+export const showStories = async () => {
   try {
-    const [data, genres, storiesCount] = await Promise.all([
+    const [data, genres] = await Promise.all([
       fetchStories(GET_POST_STORIES),
       getGenres(),
       countStories(),
@@ -23,13 +18,12 @@ export const showStories = async (page: number = 1) => {
       (response) => response.text()
     );
 
-    const storyCardsHtml = populateTemplate(data);
+    const storyCardsHtml = populateTemplate(data, "About Story");
 
     const tempElement = document.createElement("div");
 
     tempElement.innerHTML = htmlFile;
 
-    //populate the genre filter dropdown
     const genreSelect = tempElement.querySelector("#genre-filter");
     if (genreSelect) {
       genres.forEach((genre: IGenre) => {
@@ -45,41 +39,45 @@ export const showStories = async (page: number = 1) => {
       container.innerHTML = storyCardsHtml;
     }
 
-    updatePaginationControls(storiesCount, page, showStories);
-
     return tempElement.innerHTML;
   } catch (error) {
     return error;
   }
 };
 
-//too many repeated codes refactor here!
-export const showStoriesByGenre = async (page: number = 1) => {
-  // event.preventDefault();
+export const showStoriesByGenre = async () => {
   const genreSelect = document.getElementById(
     "genre-filter"
   ) as HTMLSelectElement;
-  const selectedGenre = genreSelect.value;
+  const ratingSelect = document.getElementById(
+    "rating-filter"
+  ) as HTMLSelectElement;
 
-  if (selectedGenre === "All") {
-    return showStories(page);
+  const selectedGenre = genreSelect.value;
+  const selectedRating = ratingSelect.value;
+
+  console.log(`selected rating is : ${selectedRating}`);
+  console.log(`selected genre is :${selectedGenre} `);
+
+  if (selectedGenre === "All" && selectedRating === "All") {
+    return;
   }
 
-  const offset = (page - 1) * parseInt(LIMIT);
 
   try {
-    const response = await filterByGenre(selectedGenre, offset);
+    const response = await filterByGenre(
+      selectedGenre,
+      parseInt(selectedRating),
 
-    const filteredStoryCardsHtml = populateTemplate(response);
+    );
+
+    const filteredStoryCardsHtml = populateTemplate(response, "About Story");
 
     const container = document.getElementById("story-cards-container");
     if (container) {
       container.innerHTML = filteredStoryCardsHtml;
     }
 
-    updatePaginationControls(response.totalStories, page, (page) =>
-      showStoriesByGenre(page)
-    );
   } catch (error) {
     console.error("Error fetching filtered stories:", error);
   }
@@ -88,25 +86,23 @@ export const showStoriesByGenre = async (page: number = 1) => {
 export const getStoriesFromSearch = async (event: Event) => {
   event.preventDefault();
   try {
-    console.log("inside getStoriesFromSearch");
 
     const storyToSearch = (
       document.getElementById("default-search") as HTMLInputElement
     ).value;
 
-    const data = await fetchStories("/search", "0","50",storyToSearch);
+    console.log(`story to search : ${storyToSearch}`)
 
-    console.log(`data from backend : ${data}`)
-    const searchedStoryCardHtml = populateTemplate(data);
+    const data = await fetchStories("/search", "0", "50", storyToSearch);
+
+    console.log(`data from backend : ${data}`);
+    const searchedStoryCardHtml = populateTemplate(data, "About Story");
 
     const container = document.getElementById("story-cards-container");
     if (container) {
       container.innerHTML = searchedStoryCardHtml;
     }
 
-    // updatePaginationControls(response.totalStories, page, (page) =>
-    //   showStoriesByGenre(page)
-    // );
   } catch (error) {
     console.log(error);
   }

@@ -22,7 +22,7 @@ route.get("/genre-count",authentication, getTotalStoriesCountByGenre);
 route.get("/author",authentication,getStoriesByUserId);
 route.get("/:id", authentication, getStoryById);
 route.get("/",authentication, getStories);
-route.put("/:id", authentication, updateStory);
+route.put("/:id", authentication,upload.single("coverImage"), updateStory);
 route.delete("/:id", authentication, deleteStory);
 
 route.use("/:storyId/chapter", authentication, chapterRouter);

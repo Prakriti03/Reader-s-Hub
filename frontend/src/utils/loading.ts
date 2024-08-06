@@ -1,17 +1,15 @@
-const setLoading = (isLoading: boolean) => {
-  const loadingSpinner = document.getElementById(
-    "loadingSpinner"
+const setLoading = (isLoading: boolean, elementId: string) => {
+  const loadingOverlay = document.getElementById(
+    "loadingOverlay"
   ) as HTMLElement;
-  const signUpButton = document.getElementById(
-    "signUpButton"
-  ) as HTMLButtonElement;
+  const saveButton = document.getElementById(elementId) as HTMLButtonElement;
 
   if (isLoading) {
-    loadingSpinner.classList.remove("hidden");
-    signUpButton.disabled = true;
+    loadingOverlay.classList.remove("hidden");
+    saveButton.disabled = true;
   } else {
-    loadingSpinner.classList.add("hidden");
-    signUpButton.disabled = false;
+    loadingOverlay.classList.add("hidden");
+    saveButton.disabled = false;
   }
 };
 

@@ -14,7 +14,7 @@ export class UserModel extends BaseModel {
     };
     const query = this.queryBuilder().insert(userToCreate).table("Users");
     const data = await query;
-    return data;
+    return "User successfully created";
   }
 
   static async getUsers() {

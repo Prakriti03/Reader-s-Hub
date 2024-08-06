@@ -6,6 +6,7 @@ import { INITIAL_OFFSET, LIMIT } from "../constants/writings";
 
 export async function addStoryWritings(storyData: FormData) {
   try {
+    console.log(`story data is :${storyData}`)
     const response = await axios.post(
       `${BASE_URL}${GET_POST_STORIES}`,
       storyData,
@@ -56,19 +57,23 @@ export const displayStoriesById = async (id: string) => {
   }
 };
 
-export const filterByGenre = async (genre: string, offset: number) => {
+export const filterByGenre = async (
+  genre: string,
+  rating: number,
+) => {
   try {
     const response = await axios.get(`${BASE_URL}/stories`, {
       params: {
-        limit: LIMIT,
-        offset: offset,
         genre: genre,
+        rating: rating,
       },
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
+
+    console.log(response.data);
     return response.data;
   } catch (error) {
     return error;
@@ -129,6 +134,25 @@ export const countStories = async () => {
     });
 
     console.log(`count of stories : ${response.data}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateStory = async (formData: FormData, storyId: string) => {
+  try {
+    const response = await axios.put(
+      `${BASE_URL}/stories/${storyId}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log(response.data);
     return response.data;
   } catch (error) {
     return error;

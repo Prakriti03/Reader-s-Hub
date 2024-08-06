@@ -7,7 +7,8 @@ const route = express();
 
 route.post('/',authentication,addToLibrary);
 route.get('/',authentication,getLibrary);
-route.delete('/:storyId',authentication,deleteFromLibrary)
+route.delete('/:storyId',authentication,deleteFromLibrary);
+route.get('/check/:storyId',authentication,)
 // route.put();         //later while showing how much portion is read
 
 export default route;
