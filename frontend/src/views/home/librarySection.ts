@@ -4,7 +4,6 @@ import {
 } from "../../utils/populateTemplates";
 import { addToLibrary } from "../../services/library.services";
 import { fetchStories } from "../../services/stories.services";
-import { LIMIT } from "../../constants/writings";
 import { IStories } from "../../interfaces/story.interfaces";
 
 export const showLibrary = async () => {

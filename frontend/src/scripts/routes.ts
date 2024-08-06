@@ -1,12 +1,9 @@
 import UniversalRouter from "universal-router";
-import { isAuthenticated } from "../utils/token";
-import { navigateTo } from "./eventHandlers/auth.eventhandler";
 import { showStories } from "../views/home/storiesSection";
 import { showLibrary } from "../views/home/librarySection";
 import { fetchStoryData } from "../views/readings/getStory";
 import { IParams } from "../interfaces/story.interfaces";
 import { getListOfChapters } from "../views/readings/chaptersList.readings";
-import { getChapterByNumber } from "../services/chapters.services";
 import { getChapter } from "../views/readings/chapters";
 import { populateGenreList } from "../utils/populateTemplates";
 import { displayProfile } from "../views/dashboards/user.dashboard";

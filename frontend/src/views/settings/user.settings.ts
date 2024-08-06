@@ -1,4 +1,3 @@
-import { signup } from "../../services/auth.services";
 import {
   changeUserData,
   deleteUserData,
