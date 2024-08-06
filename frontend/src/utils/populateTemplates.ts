@@ -11,7 +11,7 @@ export function populateTemplate(stories: any, templatePurpose: string) {
   return stories
     .map(
       (story: IStories) => `
-       <div class="bg-white rounded-lg shadow-md overflow-hidden" id= "story-card-${
+       <div class="bg-white rounded-lg shadow-xl overflow-hidden" id= "story-card-${
          story.id
        }">
       <img class="w-full h-48 object-cover" src="${
@@ -67,6 +67,9 @@ export async function populateStoryTemplate(
       actionButtons = `
         <button id="start-reading-button" class="bg-orange-700 text-white font-bold text-lg hover:bg-orange-900 p-2 cursor-pointer">
           Start Reading
+        </button>
+        <button id="add-to-library-button" class="bg-orange-700 text-white font-bold text-lg hover:bg-orange-900 p-2 cursor-pointer">
+          Add to Library
         </button>
       `;
     } else {

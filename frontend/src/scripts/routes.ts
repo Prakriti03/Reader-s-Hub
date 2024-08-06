@@ -23,17 +23,6 @@ const routes = [
       );
     },
   },
-  // {
-  //   path: "/home",
-  //   action: async () => {
-  //     if (!isAuthenticated()) {
-  //       return navigateTo("/");
-  //     }
-  //     return await fetch("./src/views/home/home.html").then((response) =>
-  //       response.text()
-  //     );
-  //   },
-  // },
 
   {
     path: "/signup",
@@ -46,13 +35,8 @@ const routes = [
   //for checking : combine all below to the home page
   {
     path: "/home",
-    action: async (context: any) => {
-      if (!isAuthenticated()) {
-        return navigateTo("/");
-      }
-      const urlParams = new URLSearchParams(context.querystring);
-      const page = urlParams.get("page") ? parseInt(urlParams.get("page")!) : 1;
-      const response = await showStories(page);
+    action: async () => {
+      const response = await showStories();
       return response;
     },
   },
@@ -133,13 +117,13 @@ const routes = [
     },
   },
   {
-    path : "/stories/:id/edit",
+    path: "/stories/:id/edit",
     action: async ({ params }: { params: IParams }) => {
       const { id } = params;
       const response = await displayEditStoryPage(id!);
       return response;
     },
-  }
+  },
 ];
 
 const router = new UniversalRouter(routes);

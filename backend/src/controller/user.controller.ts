@@ -1,9 +1,13 @@
-import { Response } from "express";
+import { NextFunction, Response } from "express";
 import { Request } from "../interfaces/auth.interface";
 import * as UserService from "../services/user.services";
 import { cloudinary } from "../config/cloudinary.config";
 
-export async function createUser(req: Request, res: Response) {
+export async function createUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   const { body } = req;
   const profilePicture = req.file;
 
@@ -19,11 +23,10 @@ export async function createUser(req: Request, res: Response) {
         profilePictureUrl: result.secure_url,
       };
       const data = await UserService.createUser(userData);
+      res.json(data);
     }
-    res.json(body);
   } catch (error) {
-    console.log("here");
-    res.json(error);
+    next(error);
   }
 }
 

@@ -2,6 +2,7 @@ import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { toolbarOptions } from "../../constants/writings";
 import { addChapter } from "../../services/chapters.services";
+import { navigateTo } from "../../scripts/eventHandlers/auth.eventhandler";
 
 let quill: Quill;
 
@@ -30,10 +31,16 @@ export async function saveContent(storyId: string, chapterNumber: number) {
 
   try {
     const response = await addChapter(payload, storyId, chapterNumber);
+    if(response.chapterTopic){
+      alert(`Chapter ${response.chapterTopic} created`);
+      navigateTo(`/stories/${storyId}/chapter`)
+    }
+    else{
 
-    alert(response);
+      alert(response)
+    }
   } catch (error) {
-    console.log(error);
+    alert(error);
   }
 }
 

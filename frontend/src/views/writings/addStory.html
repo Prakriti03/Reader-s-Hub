@@ -1,11 +1,22 @@
 <div class="container mx-auto my-8 p-4">
-  <div class="bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto">
-    <h2 class="text-2xl font-semibold mb-6">Create Your Story</h2>
+  <!-- Blurred background overlay -->
+  <div class="absolute inset-0 bg-black opacity-80 hidden"></div>
 
-    <form id="create-story" >
+  <!-- Full-screen loading overlay -->
+  <div
+    id="loadingOverlay"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50 hidden"
+  >
+    <div class="loader"></div>
+  </div>
+
+  <div class="bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto">
+    <h2 class="text-4xl font-bold mb-6 text-primary">Create Your Story</h2>
+
+    <form id="create-story">
       <!-- Title Input -->
       <div class="mb-6">
-        <label for="title" class="block text-sm font-medium text-gray-700"
+        <label for="title" class="block text-sm font-medium text-secondary"
           >Title</label
         >
         <input
@@ -20,7 +31,9 @@
 
       <!-- Description Input -->
       <div class="mb-6">
-        <label for="description" class="block text-sm font-medium text-gray-700"
+        <label
+          for="description"
+          class="block text-sm font-medium text-secondary"
           >Description</label
         >
         <textarea
@@ -35,7 +48,7 @@
 
       <!-- Genre Input -->
       <div class="mb-6">
-        <label for="genre" class="block text-sm font-medium text-gray-700"
+        <label for="genre" class="block text-sm font-medium text-secondary"
           >Genre</label
         >
         <div class="flex items-center">
@@ -43,12 +56,11 @@
             id="genre-select"
             name="genre"
             class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          >
-          </select>
+          ></select>
           <button
             type="button"
             id="add-genre-button"
-            class="ml-4 rounded-md bg-gray-900 px-6 py-2 text-sm font-medium text-white"
+            class="ml-4 rounded-md bg-primary px-6 py-2 text-sm font-medium text-white"
           >
             Add
           </button>
@@ -58,13 +70,13 @@
 
       <!-- Cover Image Upload -->
       <div class="mb-6">
-        <label for="coverImage" class="block text-sm font-medium text-gray-700"
+        <label for="coverImage" class="block text-sm font-medium text-secondary"
           >Cover Image</label
         >
         <input
           type="file"
           id="coverImageInput"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-secondary mt-1 leading-tight focus:outline-none focus:shadow-outline"
           accept="image/*"
           required
         />
@@ -74,7 +86,8 @@
       <div class="text-right">
         <button
           type="submit"
-          class="rounded-md bg-gray-900 px-6 py-2 text-sm font-medium text-white"
+          class="rounded-md bg-primary px-6 py-2 text-sm font-medium text-white"
+          id="submitStoryButton"
         >
           Submit
         </button>
@@ -82,3 +95,23 @@
     </form>
   </div>
 </div>
+
+<style>
+  .loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>

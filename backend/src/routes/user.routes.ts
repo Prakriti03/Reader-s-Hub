@@ -14,7 +14,7 @@ import { createUserBodySchema } from "../schema/user.schema";
 
 const route = express();
 
-route.post("/signup", validateReqBody(createUserBodySchema),upload.single("profilePicture"), createUser);
+route.post("/signup", upload.single("profilePicture"), validateReqBody(createUserBodySchema),createUser);
 route.get("/user", authentication, getLoggedInUser);
 route.get("/", authentication, authorize("admin"), getUsers);
 route.get("/:id", authentication, getUserById);

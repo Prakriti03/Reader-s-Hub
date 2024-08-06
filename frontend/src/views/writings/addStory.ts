@@ -1,12 +1,15 @@
 import { addStoryWritings } from "../../services/stories.services";
 import { getGenres, mapGenreStory } from "../../services/genres.services";
+import setLoading from "../../utils/loading";
+import { navigateTo } from "../../scripts/eventHandlers/auth.eventhandler";
 
 let listOfGenresId: string[];
 let genreStoryMap: object;
 
 export const addStory = async (event: Event) => {
-  // setLoading(true);
   event.preventDefault();
+
+  setLoading(true, "submitStoryButton");  
 
   genreStoryMap = {};
 
@@ -27,8 +30,11 @@ export const addStory = async (event: Event) => {
   formData.append("description", storyDescription);
   formData.append("coverImage", coverImage);
 
+  console.log(`formdata is : ${formData}`)
+
   try {
     const response = await addStoryWritings(formData);
+    console.log(response)
     const storyId = response[0].id;
 
     genreStoryMap = listOfGenresId.map((genreId) => ({
@@ -36,15 +42,24 @@ export const addStory = async (event: Event) => {
       genre_id: genreId,
     }));
 
-    const genreStoryResponse = await mapGenreStory(genreStoryMap);
+    await mapGenreStory(genreStoryMap);
 
-    alert(JSON.stringify(response));
+    console.log(response)
+
+    if(response[0].title){
+
+      alert(`Story ${response[0].title} created`);
+      navigateTo("/profile")
+    }
+    
   } catch (error) {
+    console.log(error)
+      alert(JSON.stringify(error))
     return error;
   }
-  // finally {
-  //   setLoading(false); // Set loading state to false
-  // }
+  finally {
+    setLoading(false,"submitStoryButton"); // Set loading state to false
+  }
 };
 
 export const addGenre = () => {

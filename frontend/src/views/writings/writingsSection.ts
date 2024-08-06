@@ -2,7 +2,7 @@ import { IStories } from "../../interfaces/story.interfaces";
 import { fetchStories } from "../../services/stories.services";
 import {  populateTemplate } from "../../utils/populateTemplates";
 
-export const displayWritings = async (limit:string,offset:string) => {
+export const displayWritings = async (limit:string="3",offset:string="0") => {
   
     try {
       const [data, htmlFile] = await Promise.all([

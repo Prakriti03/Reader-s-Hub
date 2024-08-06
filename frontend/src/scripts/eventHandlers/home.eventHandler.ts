@@ -49,7 +49,7 @@ export const homeEventListeners = () => {
     });
 
   document
-    .getElementById("seach-button")
+    .getElementById("search-button")
     ?.addEventListener("click", getStoriesFromSearch);
 
   document
@@ -95,9 +95,8 @@ export const homeEventListeners = () => {
 
   document
     .getElementById("user-menu-signout")
-    ?.addEventListener("click", (event: Event) => {
-      event.preventDefault();
+    ?.addEventListener("click", () => {
+      navigateTo("/");
       localStorage.removeItem("token");
-      window.location.href = "/";
     });
 };

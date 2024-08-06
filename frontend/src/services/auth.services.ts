@@ -23,6 +23,7 @@ export async function signup(formData: FormData) {
     });
     return response.data;
   } catch (error: any) {
+    console.log(error)
     return error.response.data.error;
   }
 }

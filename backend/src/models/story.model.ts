@@ -64,12 +64,12 @@ export class StoryModel extends BaseModel {
     limit: string,
     offset: string
   ) {
-
-    console.log(`for wriitng : limit : ${limit}, offset: ${offset}`)
+    console.log(`for wriitng : limit : ${limit}, offset: ${offset}`);
     const query = this.queryBuilder()
       .select(
         "Stories.*",
-        "Users.username","Users.id as user_id",
+        "Users.username",
+        "Users.id as user_id",
         this.queryBuilder().raw('array_agg("Genres".genre) as genres')
       )
       .from("Stories")
@@ -77,10 +77,10 @@ export class StoryModel extends BaseModel {
       .leftJoin("Story-Genre", "Stories.id", "Story-Genre.stories_id")
       .leftJoin("Genres", "Story-Genre.genre_id", "Genres.id")
       .where("Stories.user_id", userId)
-      .groupBy("Stories.id", "Users.username","Users.id")
+      .groupBy("Stories.id", "Users.username", "Users.id")
       .limit(parseInt(limit))
-      .offset(parseInt(offset))
-     
+      .offset(parseInt(offset));
+
     const data = await query;
 
     return data;
@@ -89,26 +89,43 @@ export class StoryModel extends BaseModel {
   static async getStoriesByGenre(
     limit: number,
     offset: number,
-    genre?: string
+    genre?: string,
+    rating?: string
   ) {
-    const query = this.queryBuilder()
+    let query = this.queryBuilder()
       .select(
         "Stories.*",
         "Users.username",
-        "Genres.genre",
-        this.queryBuilder().raw('array_agg("Genres".genre) as genres')
+        this.queryBuilder().raw('array_agg("Genres".genre) as genres'),
+        this.queryBuilder().raw('AVG("Reviews".rating) as avg_rating')
       )
       .from("Stories")
       .leftJoin("Users", "Stories.user_id", "Users.id")
       .leftJoin("Story-Genre", "Stories.id", "Story-Genre.stories_id")
       .leftJoin("Genres", "Story-Genre.genre_id", "Genres.id")
-      .where("Genres.genre", genre)
-      .groupBy("Stories.id", "Users.username", "Genres.genre")
-      .limit(limit)
-      .offset(offset)
-      .returning("*");
+      .leftJoin("Reviews", "Stories.id", "Reviews.stories_id")
+      .groupBy("Stories.id", "Users.username");
+
+    if (genre) {
+      query = query.where("Genres.genre", genre);
+      console.log(`query : ${query}`);
+    }
+    console.log(`rating is ${rating}`);
+
+    if (rating!="NaN") {
+      console.log("inside rating!!");
+      query = query.having(
+        this.queryBuilder().raw('AVG("Reviews".rating) >= ?', [
+          parseInt(rating!),
+        ])
+      );
+    }
+
+    // query.limit(limit).offset(offset).returning("*");
 
     const data = await query;
+
+    console.log(`get stories by gnere and rating : ${data}`);
 
     return data;
   }
@@ -125,7 +142,7 @@ export class StoryModel extends BaseModel {
       .table("Stories")
       .where({
         id: id,
-        user_id: userId, //change snake case to camel case
+        user_id: userId,
       })
       .returning("*");
 

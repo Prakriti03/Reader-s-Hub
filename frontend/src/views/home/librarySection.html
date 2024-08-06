@@ -1,5 +1,95 @@
+<nav class="bg-white">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex items-center justify-between">
+      <div class="flex flex-shrink-0 items-center" >
+        <a href=""><img src="/logo.png" alt="Logo" class="h-16 md:h-20" /></a>
+      </div>
+
+      <!-- Center Menu Items -->
+      <div class="flex-1 flex justify-center items-center space-x-4">
+        <a
+          href=""
+          class="flex items-center space-x-2 text-sm font-medium text-primary" id="logo-icon"
+        >
+          <span class="material-icons">home</span>
+          <span>Home</span>
+        </a>
+        <a
+          href=""
+          class="flex items-center space-x-2 text-sm font-medium text-primary"
+          id="view-library"
+        >
+          <span class="material-icons">library_books</span>
+          <span>Library</span>
+        </a>
+        <a
+          href=""
+          class="flex items-center space-x-2 text-sm font-medium text-primary"
+          id="start-writing-button"
+        >
+          <span class="material-icons">edit</span>
+          <span>Write</span>
+        </a>
+      </div>
+
+      <div
+        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      >
+        <!-- Profile dropdown -->
+        <div class="relative ml-10">
+          <button
+            type="button"
+            class="relative flex rounded-full bg-secondary text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-secondary"
+            id="user-menu-button"
+            aria-expanded="false"
+            aria-haspopup="true"
+          >
+            <span class="absolute -inset-1.5"></span>
+            <span class="sr-only">Open user menu</span>
+            <img class="h-10 w-auto rounded-full" src="/profile.jpeg" alt="" />
+          </button>
+
+          <div
+            id="dropdown-menu"
+            class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="user-menu-button"
+            tabindex="-1"
+          >
+            <a
+              href=""
+              class="block px-4 py-2 text-sm text-gray-700"
+              role="menuitem"
+              tabindex="-1"
+              id="user-menu-profile"
+              >Your Profile</a
+            >
+            <a
+              href=""
+              class="block px-4 py-2 text-sm text-gray-700"
+              role="menuitem"
+              tabindex="-1"
+              id="view-settings"
+              >Settings</a
+            >
+            <a
+              href=""
+              class="block px-4 py-2 text-sm text-gray-700"
+              role="menuitem"
+              tabindex="-1"
+              id="user-menu-signout"
+              >Sign out</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
 <section class="mt-12 px-8">
-  <h2 class="text-2xl font-semibold mb-4">Your Reading List</h2>
+  <h2 class="text-4xl font-semibold mb-12 text-center text-secondary">Your Reading List</h2>
   <div
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
     id="library-cards-container"

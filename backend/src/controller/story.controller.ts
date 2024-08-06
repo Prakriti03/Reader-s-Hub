@@ -24,9 +24,12 @@ export async function createStory(req: Request, res: Response) {
 }
 export async function getStories(req: Request, res: Response) {
   const genre = req.query.genre as string;
+  const ratings = req.query.rating as string;
+
   const limit = parseInt(req.query.limit as string, 10) || 10; //default limit
   const offset = parseInt(req.query.offset as string, 10) || 0;
-  const data = await StoryService.getStories(limit, offset, genre);
+
+  const data = await StoryService.getStories(limit, offset, genre, ratings);
   res.json(data);
 }
 
@@ -64,7 +67,7 @@ export async function updateStory(req: Request, res: Response) {
       const result = await cloudinary.uploader.upload(coverImage.path, {
         folder: "story-coverImages",
       });
-      storyData.coverImageUrl= result.secure_url;
+      storyData.coverImageUrl = result.secure_url;
     }
 
     const data = await StoryService.updateStory(id, storyData, userId!);

@@ -5,6 +5,7 @@ import setLoading from "../../utils/loading";
 const handleSignUp = async (event: Event) => {
   event.preventDefault();
   setLoading(true, "signUpButton");
+
   const username = (
     document.getElementById("usernameInput") as HTMLInputElement
   ).value;
@@ -28,8 +29,11 @@ const handleSignUp = async (event: Event) => {
 
   try {
     const response = await signup(formData);
+
     alert(response);
-    navigateTo("/");
+    if (response=="User successfully created") {
+      navigateTo("/");
+    }
   } catch (error: any) {
     alert(JSON.stringify(error.response.data));
   } finally {

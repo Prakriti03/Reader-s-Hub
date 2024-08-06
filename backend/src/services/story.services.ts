@@ -15,10 +15,11 @@ export const getStoryById = async (id: string) => {
 export const getStories = async (
   limit: number,
   offset: number,
-  genre?: string
+  genre?: string,
+  rating?:string
 ) => {
-  if (genre) {
-    const data = await StoryModel.getStoriesByGenre(limit, offset, genre);
+  if (genre || rating) {
+    const data = await StoryModel.getStoriesByGenre(limit, offset, genre,rating);
 
     return data;
   } else {

@@ -12,7 +12,23 @@ export default {
     "./src/views/settings/user.settings.html",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#FF4500",
+        secondary: "#FF6347",
+        tertiary: " 	#ff9c59",
+        Text : "#f6f6f6"
+      },
+      animation: {
+        typewriter: "typewriter 4s steps(44) 1s 1 normal  both",
+      },
+      keyframes: {
+        typewriter: {
+          "0%": { width: "0%" },
+          "100%": { width: "100%" },
+        },
+      },
+    },
   },
   plugins: [],
 };

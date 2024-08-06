@@ -13,10 +13,14 @@ const handleLogin = async (event: Event) => {
   try {
     const response = await login(email, password);
     saveToken(response.accessToken);
-    alert(JSON.stringify(response));
-    const accessToken = response.accessToken
+
+    const accessToken = response.accessToken;
     if (accessToken) {
       navigateTo("/home");
+    }
+    else{
+
+      alert(JSON.stringify(response));
     }
   } catch (error) {
     console.error("Error during login:", error);
