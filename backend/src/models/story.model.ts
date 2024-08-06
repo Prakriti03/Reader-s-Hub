@@ -96,7 +96,7 @@ export class StoryModel extends BaseModel {
       .select(
         "Stories.*",
         "Users.username",
-        this.queryBuilder().raw('array_agg("Genres".genre) as genres'),
+        this.queryBuilder().raw('array_agg("Genres".genre) as genres'),   
         this.queryBuilder().raw('AVG("Reviews".rating) as avg_rating')
       )
       .from("Stories")

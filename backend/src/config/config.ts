@@ -5,7 +5,8 @@ import multer from "multer";
 
 dotenv.config({ path: __dirname + "/../../.env" });
 
-const config = {
+const config = {  
+  
   port: process.env.PORT,
   jwt: {
     secret: process.env.JWT_SECRET,
